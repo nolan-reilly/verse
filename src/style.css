@@ -1,1 +1,165 @@
-@import "tailwindcss";
+:root {
+  --light-gray: #edeeef;
+  --dark-gray: #969696;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+.gap-32 {
+  gap: 32px;
+}
+
+.gap-44 {
+  gap: 44px;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+.py-8 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.py-16 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.py-32 {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.width-32 {
+  width: 32px;
+}
+
+.width-48 {
+  width: 48px;
+}
+
+.text-large {
+  font-size: 32px;
+}
+
+.weight-300 {
+  font-weight: 300;
+}
+
+.weight-400 {
+  font-weight: 400;
+}
+
+.weight-500 {
+  font-weight: 500;
+}
+
+.weight-600 {
+  font-weight: 600;
+}
+
+.weight-700 {
+  font-weight: 700;
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.bg-light-gray {
+  background-color: var(--light-gray);
+}
+
+.border-radius {
+  border-radius: 8px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.login-slider {
+  background-color: var(--white);
+  flex: 1;
+  border-radius: 10px;
+  padding: 2px 0px;
+  margin: 0px 0px 0px 1px;
+}
+
+.text-input {
+  color: var(--dark-gray);
+  font-size: 16px;
+  padding: 16px 16px;
+  border-radius: 8px;
+  border: solid 1px var(--dark-gray);
+}
+
+.login-btn {
+  border: none;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  padding: 18px 0px;
+}
