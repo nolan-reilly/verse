@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Login() {
   return (
     <div className="lg-flex vh-100 relative overflow-hidden">
@@ -55,7 +57,9 @@ export default function Login() {
             </div>
           </div>
 
-          <button className="full-width login-btn">Login</button>
+          <Link className="full-width login-btn" to="homepage">
+            Login
+          </Link>
 
           <div className="flex flex-col gap-16">
             <p className="weight-300">Other sign in options</p>
