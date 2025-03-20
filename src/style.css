@@ -163,3 +163,55 @@
   font-weight: 600;
   padding: 18px 0px;
 }
+
+.relative {
+  position: relative;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+/* Medium */
+@media (min-width: 768px) {
+  .container {
+    width: 75%;
+  }
+
+  .gray-box {
+    position: absolute;
+    bottom: -45%;
+    left: 400;
+    width: 200%;
+    height: 100%;
+    background-color: var(--light-gray);
+    transform: rotate(-45deg);
+    z-index: -1;
+  }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+  .lg-flex {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .gray-box {
+    position: static;
+    transform: none;
+    width: 80%;
+    height: 100%;
+    background-color: var(--light-gray);
+    z-index: 0;
+  }
+
+  .container {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
