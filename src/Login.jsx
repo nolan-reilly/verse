@@ -5,7 +5,7 @@ export default function Login() {
     <div className="lg-flex vh-100 relative overflow-hidden">
       <div className="gray-box"></div>
 
-      <div className="container py-32 flex flex-col gap-32">
+      <div className="container py-32 px-64 flex flex-col gap-32">
         {/* Logo */}
         <div className="flex flex-row justify-end">
           <img className="width-48" src="./star.svg" alt="Star" />

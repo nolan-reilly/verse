@@ -1,6 +1,6 @@
 export default function Post() {
   return (
-    <div>
+    <div className="max-width-512 mx-auto">
       <div className="bg-dark-gray">
         <div className="container flex flex-row align-center py-8 gap-8">
           <div className="circle-icon"></div>
