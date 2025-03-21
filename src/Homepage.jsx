@@ -1,7 +1,7 @@
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import Post from "./Post";
-import SuggestedContent from "./SuggestContent";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Post from "./components/Post";
+import SuggestedContent from "./components/SuggestContent";
 
 export default function Homepage() {
   return (
