@@ -355,4 +355,9 @@
     width: 90%;
     margin: 0 auto;
   }
+
+  .lg-px-64 {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
