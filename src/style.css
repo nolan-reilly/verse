@@ -92,6 +92,8 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .p-4 {
@@ -162,8 +164,12 @@
   width: 100%;
 }
 
+.text-small {
+  font-size: 16px;
+}
+
 .text-medium {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .text-large {
@@ -274,6 +280,10 @@
     width: 75%;
   }
 
+  .navbar {
+    display: none;
+  }
+
   .max-width-512 {
     max-width: 512px;
   }
@@ -291,7 +301,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 256px 1fr;
   }
 
   .sidebar {
