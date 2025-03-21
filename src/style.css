@@ -100,6 +100,10 @@
   padding: 4px;
 }
 
+.p-8 {
+  padding: 8px;
+}
+
 .py-8 {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -262,6 +266,13 @@
   border-radius: 50%;
 }
 
+.large-circle-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--black);
+  border-radius: 50%;
+}
+
 .relative {
   position: relative;
 }
@@ -272,6 +283,10 @@
 
 .vh-100 {
   height: 100vh;
+}
+
+.suggested-content {
+  display: none;
 }
 
 /* Medium */
@@ -323,5 +338,21 @@
     height: 100%;
     background-color: var(--light-gray);
     z-index: 0;
+  }
+
+  .suggested-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 256px 1fr;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 90%;
+    margin: 0 auto;
   }
 }

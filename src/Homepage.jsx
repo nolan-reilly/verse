@@ -1,133 +1,74 @@
 import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 import Post from "./Post";
 
 export default function Homepage() {
   return (
     <div class="grid">
       {/* Sidebar */}
-      <div className="sidebar py-24 bg-light-gray">
-        <div className="flex flex-col gap-44">
-          {/* Logo */}
-          <div className="flex flex-row align-center">
-            <img className="width-48" src="./star.svg" alt="Star" />
-            <p className="text-large weight-700">Verse</p>
-          </div>
-
-          {/* Sidebar Navigation Items */}
-          <div className="flex flex-col gap-16">
-            <div className="flex flex-row align-center gap-8">
-              <div>
-                <img className="width-28" src="./home.svg" alt="Home Icon" />
-              </div>
-              <p className="text-medium">Home</p>
-            </div>
-
-            <div className="flex flex-row align-center gap-8">
-              <div>
-                <img
-                  className="width-28"
-                  src="./search.svg"
-                  alt="Search Icon"
-                />
-              </div>
-              <p className="text-medium">Search</p>
-            </div>
-
-            <div className="flex flex-row align-center gap-8">
-              <div>
-                <img className="width-28" src="./heart.svg" alt="Heart Icon" />
-              </div>
-              <p className="text-medium">Notifications</p>
-            </div>
-
-            <div className="flex flex-row align-center gap-8">
-              <div>
-                <img
-                  className="width-28"
-                  src="./message.svg"
-                  alt="Message Icon"
-                />
-              </div>
-
-              <p className="text-medium">Messages</p>
-            </div>
-
-            <div className="flex flex-row align-center gap-8">
-              <div>
-                <img className="width-28" src="./plus.svg" alt="Post Icon" />
-              </div>
-
-              <p className="text-medium">Post</p>
-            </div>
-
-            <div className="flex flex-row align-center gap-8">
-              <div className="circle-icon width-24"></div>
-              <p className="text-medium">Profile</p>
-            </div>
-          </div>
-
-          {/* Community Filter Items */}
-          <div className="flex flex-col gap-24">
-            <div className="flex flex-col gap-8">
-              <div>
-                <p className="text-medium">Homepage View</p>
-                <hr />
-              </div>
-
-              <div className="flex flex-row align-center gap-8 bg-dark-gray p-4 border-radius">
-                <div className="sm-circle-icon width-24"></div>
-                <p>Following</p>
-              </div>
-
-              <div className="flex flex-row align-center gap-8 bg-dark-gray p-4 border-radius">
-                <div className="sm-circle-icon width-24"></div>
-                <p>Computer Science</p>
-              </div>
-
-              <div className="flex flex-row align-center gap-8 bg-dark-gray p-4 border-radius">
-                <div className="sm-circle-icon width-24"></div>
-                <p>UI/UX</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-8">
-              <div>
-                <p className="text-medium">Join Community</p>
-                <hr />
-              </div>
-
-              <div className="flex flex-row align-center gap-8 bg-dark-gray p-4 border-radius">
-                <div className="sm-circle-icon width-24"></div>
-                <p>Art</p>
-              </div>
-
-              <div className="flex flex-row align-center gap-8 bg-dark-gray p-4 border-radius">
-                <div className="sm-circle-icon width-24"></div>
-                <p>Gaming</p>
-              </div>
-
-              <div className="flex flex-row align-center gap-8 bg-dark-gray p-4 border-radius">
-                <div className="sm-circle-icon width-24"></div>
-                <p>Exercise</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Sidebar />
 
       {/* Main Content */}
       <div>
         {/* Navbar for mobile */}
         <Navbar />
 
-        {/* large scrolling area */}
-        <div>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+        <div className="content-grid py-16">
+          <div>
+            {/* large scrolling area */}
+            <div>
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+            </div>
+          </div>
+
+          <div className="suggested-content gap-8">
+            <p className="weight-600 text-small">Suggested for you</p>
+
+            <div className="flex flex-row p-8 border-radius gap-16 bg-dark-gray">
+              <div className="large-circle-icon width-24"></div>
+              <div className="flex flex-col">
+                <p className="text-medium">Username</p>
+                <p className="text-small">Lorem ipsum dolor sit.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-row p-8 border-radius gap-16 bg-dark-gray">
+              <div className="large-circle-icon width-24"></div>
+              <div className="flex flex-col">
+                <p className="text-medium">Username</p>
+                <p className="text-small">Lorem ipsum dolor sit.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-row p-8 border-radius gap-16 bg-dark-gray">
+              <div className="large-circle-icon width-24"></div>
+              <div className="flex flex-col">
+                <p className="text-medium">Username</p>
+                <p className="text-small">Lorem ipsum dolor sit.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-row p-8 border-radius gap-16 bg-dark-gray">
+              <div className="large-circle-icon width-24"></div>
+              <div className="flex flex-col">
+                <p className="text-medium">Username</p>
+                <p className="text-small">Lorem ipsum dolor sit.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-row p-8 border-radius gap-16 bg-dark-gray">
+              <div className="large-circle-icon width-24"></div>
+              <div className="flex flex-col">
+                <p className="text-medium">Username</p>
+                <p className="text-small">Lorem ipsum dolor sit.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
