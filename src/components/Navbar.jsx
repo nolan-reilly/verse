@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -51,32 +52,7 @@ export default function Navbar() {
           <p className="text-small weight-500">Homepage View</p>
 
           <div className="sidebar-item flex flex-row align-center gap-16 py-16">
-            <img className="width-24 svg-white" src="./home.svg" alt="Home" />
-            <p className="text-small weight-500"></p>
-          </div>
-          <div className="sidebar-item flex flex-row align-center gap-16 py-16">
-            <img
-              className="width-24 svg-white"
-              src="./explore.svg"
-              alt="Explore"
-            />
-            <p className="text-small weight-500">Explore</p>
-          </div>
-          <div className="sidebar-item flex flex-row align-center gap-16 py-16">
-            <img
-              className="width-24 svg-white"
-              src="./profile.svg"
-              alt="Profile"
-            />
-            <p className="text-small weight-500">Profile</p>
-          </div>
-          <div className="sidebar-item flex flex-row align-center gap-16 py-16">
-            <img
-              className="width-24 svg-white"
-              src="./settings.svg"
-              alt="Settings"
-            />
-            <p className="text-small weight-500">Settings</p>
+            <p>Content</p>
           </div>
         </div>
       </div>
@@ -86,7 +62,7 @@ export default function Navbar() {
         <nav className="container flex flex-row justify-between align-center py-24">
           <img
             className="width-32 svg-white cursor-pointer"
-            src="./menu.svg"
+            src="./community.svg"
             alt="Menu"
             onClick={toggleSidebar}
           />
@@ -96,11 +72,20 @@ export default function Navbar() {
             <p className="text-medium weight-700">Verse</p>
           </div>
 
-          <img
-            className="width-32 svg-white"
-            src="./message.svg"
-            alt="Message"
-          />
+          {/* Messages add notifications */}
+          <Link to="/inbox">
+            <div className="position-relative">
+              <img
+                className="width-32 svg-white"
+                src="./message-square.svg"
+                alt="Message"
+              />
+
+              <div className="notification">
+                <span className="weight-700 text-sm">4</span>
+              </div>
+            </div>
+          </Link>
         </nav>
       </div>
     </>

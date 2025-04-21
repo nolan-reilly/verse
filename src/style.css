@@ -29,6 +29,21 @@ body {
   margin: 0 auto;
 }
 
+.position-relative {
+  position: relative;
+}
+
+.notification {
+  position: absolute;
+  top: -7px;
+  right: -4px;
+  background-color: red;
+  padding: 4px 8px;
+  font-size: 10px;
+  border-radius: 100%;
+  text-align: center;
+}
+
 .flex {
   display: flex;
 }
@@ -163,6 +178,10 @@ body {
   width: 32px;
 }
 
+.width-36 {
+  width: 36px;
+}
+
 .width-48 {
   width: 48px;
 }
@@ -290,6 +309,13 @@ body {
   border-radius: 50%;
 }
 
+.circle-icon-white {
+  width: 32px;
+  height: 32px;
+  background-color: var(--white);
+  border-radius: 50%;
+}
+
 .sm-circle-icon {
   width: 24px;
   height: 24px;
@@ -381,25 +407,13 @@ body.sidebar-open {
 
 .nav-item {
   transition: all 0.2s ease;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 8px;
-}
-
-.nav-item:hover {
-  background-color: var(--light-black);
-}
-
-.nav-item.active {
-  color: #ffffff;
-}
-
-.nav-item.active img {
-  filter: brightness(0) invert(1) brightness(100%);
 }
 
 /* Content grid now simplified for mobile only */
 .content-grid {
-  padding-bottom: 80px;
+  padding-bottom: 96px;
   width: 100%;
 }
 

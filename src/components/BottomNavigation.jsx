@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function BottomNavigation() {
   const [activeTab, setActiveTab] = useState("home");
@@ -10,15 +11,16 @@ export default function BottomNavigation() {
   return (
     <div className="bottom-navigation">
       <div className="container">
-        <div className="nav-items flex flex-row justify-around align-center py-12">
+        <div className="flex flex-row justify-around align-center py-8">
           <div
             className={`nav-item flex flex-col align-center gap-4 cursor-pointer ${
               activeTab === "home" ? "active" : ""
             }`}
             onClick={() => handleTabClick("home")}
           >
-            <img className="width-24 svg-white" src="./home.svg" alt="Home" />
-            <p className="text-extra-small weight-500">Home</p>
+            <Link to="/home">
+              <img className="width-24 svg-white" src="./home.svg" alt="Home" />
+            </Link>
           </div>
 
           <div
@@ -27,12 +29,13 @@ export default function BottomNavigation() {
             }`}
             onClick={() => handleTabClick("explore")}
           >
-            <img
-              className="width-24 svg-white"
-              src="./explore.svg"
-              alt="Explore"
-            />
-            <p className="text-extra-small weight-500">Explore</p>
+            <Link to="/search">
+              <img
+                className="width-32 svg-white"
+                src="./bold-search.svg"
+                alt="Explore"
+              />
+            </Link>
           </div>
 
           <div
@@ -41,28 +44,15 @@ export default function BottomNavigation() {
             }`}
             onClick={() => handleTabClick("create")}
           >
-            <div className="circle-icon flex justify-center align-center">
-              <img
-                className="width-24 svg-white"
-                src="./plus.svg"
-                alt="Create"
-              />
+            <div className="flex justify-center align-center">
+              <Link to="/create">
+                <img
+                  className="width-24 svg-white"
+                  src="./plus.svg"
+                  alt="Create"
+                />
+              </Link>
             </div>
-            <p className="text-extra-small weight-500">Create</p>
-          </div>
-
-          <div
-            className={`nav-item flex flex-col align-center gap-4 cursor-pointer ${
-              activeTab === "notifications" ? "active" : ""
-            }`}
-            onClick={() => handleTabClick("notifications")}
-          >
-            <img
-              className="width-24 svg-white"
-              src="./bell.svg"
-              alt="Notifications"
-            />
-            <p className="text-extra-small weight-500">Notifications</p>
           </div>
 
           <div
@@ -71,12 +61,15 @@ export default function BottomNavigation() {
             }`}
             onClick={() => handleTabClick("profile")}
           >
-            <img
-              className="width-24 svg-white"
-              src="./profile.svg"
-              alt="Profile"
-            />
-            <p className="text-extra-small weight-500">Profile</p>
+            <div className="flex justify-center align-center">
+              <Link to="/profile">
+                <img
+                  className="width-24 svg-white"
+                  src="./profile.svg"
+                  alt=""
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
