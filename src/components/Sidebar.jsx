@@ -1,6 +1,6 @@
 export default function Sidebar() {
   return (
-    <div className="sidebar py-24 bg-light-gray">
+    <div className="sidebar py-24 bg-light-black">
       <div className="flex flex-col gap-44">
         {/* Logo */}
         <div className="flex flex-row align-center">
