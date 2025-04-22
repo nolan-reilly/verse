@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({
+  selectedCommunities,
+  availableCommunities,
+  currentCommunity,
+  onAddCommunity,
+  onSelectCommunity,
+}) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Effect to control body scrolling when sidebar is open
@@ -28,18 +34,14 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Overlay that appears behind the sidebar when it's open */}
+      {/* Overlay */}
       {isSidebarOpen && (
         <div className="sidebar-overlay" onClick={closeSidebar}></div>
       )}
 
       {/* Mobile Sidebar */}
       <div className={`mobile-sidebar ${isSidebarOpen ? "open" : ""}`}>
-        <div className="sidebar-header flex flex-row justify-between align-center py-24">
-          <div className="flex flex-row align-center">
-            <img className="width-24 svg-white" src="./star.svg" alt="Star" />
-            <p className="text-medium weight-700">Verse</p>
-          </div>
+        <div className="flex flex-row justify-end mt-28">
           <img
             className="width-18 svg-white cursor-pointer"
             src="./cross.svg"
@@ -48,11 +50,84 @@ export default function Navbar() {
           />
         </div>
 
-        <div className="sidebar-content py-24">
-          <p className="text-small weight-500">Homepage View</p>
+        <div className="sidebar-content flex flex-col gap-44 py-8">
+          {/* Homepage View Section */}
+          <div className="mb-32">
+            <div>
+              <p className="text-small weight-500 mb-16">Homepage View</p>
+              <hr />
+            </div>
+            <div className="flex flex-col gap-12 py-8">
+              {/* Permanent Following entry */}
+              <div
+                className={`text-size-14 flex flex-row align-center justify-between py-8 px-8 ${
+                  "Following" === currentCommunity ? "active-community" : ""
+                }`}
+                onClick={() => onSelectCommunity("Following")}
+              >
+                <div className="flex flex-row align-center gap-8">
+                  <img className="svg-white width-24" src="./following.svg" />
+                  <p>Following</p>
+                </div>
+              </div>
 
-          <div className="sidebar-item flex flex-row align-center gap-16 py-16">
-            <p>Content</p>
+              {/* Communities */}
+              {selectedCommunities.map((community) => (
+                <div
+                  key={community.name}
+                  className={`text-size-14 flex flex-row align-center justify-between py-8 px-8 ${
+                    community.name === currentCommunity.name
+                      ? "active-community"
+                      : ""
+                  }`}
+                  onClick={() => onSelectCommunity(community)}
+                >
+                  <div className="flex flex-row align-center gap-8">
+                    {community.image && (
+                      <img
+                        src={community.image}
+                        className="width-24 height-24 rounded-full"
+                        alt={community.name}
+                      />
+                    )}
+                    <p>{community.name}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Suggested Communities */}
+          <div className="flex flex-col gap-12">
+            <div>
+              <p className="text-small weight-500 mb-16">
+                Suggested Communities
+              </p>
+              <hr />
+            </div>
+            {availableCommunities.map((community) => (
+              <div
+                key={community.name}
+                className="text-size-14 flex flex-row align-center justify-between gap-16 py-8 px-8"
+              >
+                <div className="flex flex-row align-center gap-8">
+                  {community.image && (
+                    <img
+                      src={community.image}
+                      className="width-24 height-24 rounded-full"
+                      alt={community.name}
+                    />
+                  )}
+                  <p>{community.name}</p>
+                </div>
+                <button
+                  onClick={() => onAddCommunity(community)}
+                  className="add-btn text-primary"
+                >
+                  <img className="svg-white width-18" src="./add.svg" alt="" />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -44,6 +44,10 @@ body {
   text-align: center;
 }
 
+.rounded-full {
+  border-radius: 50%;
+}
+
 .flex {
   display: flex;
 }
@@ -88,6 +92,10 @@ body {
   gap: 8px;
 }
 
+.gap-12 {
+  gap: 12px;
+}
+
 .gap-16 {
   gap: 16px;
 }
@@ -112,7 +120,36 @@ body {
   z-index: 1000;
 }
 
-/* Sidebar removed as not needed for mobile-only interface */
+.mobile-sidebar {
+  /* existing styles */
+  width: 280px;
+  right: -280px;
+}
+
+.close-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  padding: 8px;
+  margin: -8px;
+}
+
+.add-btn,
+.remove-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.text-primary {
+  color: #3b82f6;
+}
+
+.text-muted {
+  color: #64748b;
+}
 
 .p-4 {
   padding: 4px;
@@ -152,9 +189,18 @@ body {
   padding-bottom: 48px;
 }
 
+.px-8 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .px-64 {
   padding-left: 64px;
   padding-right: 64px;
+}
+
+.mt-28 {
+  margin-top: 28px;
 }
 
 .my-16 {
@@ -195,12 +241,20 @@ body {
   width: 128px;
 }
 
+.height-24 {
+  height: 24px;
+}
+
 .full-width {
   width: 100%;
 }
 
 .text-extra-small {
   font-size: 12px;
+}
+
+.text-size-14 {
+  font-size: 14px;
 }
 
 .text-small {
@@ -366,21 +420,6 @@ body {
   position: relative;
 }
 
-.slider-background {
-  position: absolute;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-.z-10 {
-  z-index: 1;
-}
-
 /* Transition effects */
 .transition-all {
   transition: all 0.3s ease-in-out;
@@ -409,6 +448,12 @@ body {
   left: 0; /* Move to visible position when open */
 }
 
+.active-community {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  border-radius: 8px;
+}
+
 /* Sidebar Overlay */
 .sidebar-overlay {
   position: fixed;
@@ -419,19 +464,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1999;
   transition: opacity 0.3s ease;
-}
-
-/* Sidebar Item Hover Effect */
-.sidebar-item {
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border-radius: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.sidebar-item:hover {
-  background-color: var(--light-black);
 }
 
 /* Add this to make the body unscrollable when sidebar is open */
