@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  return (
-    <div className="lg-flex vh-100 relative overflow-hidden">
-      <div className="gray-box"></div>
+  const [isLogin, setIsLogin] = useState(true);
 
+  return (
+    <div className="bg-white lg-flex vh-100 relative overflow-hidden">
       <div className="container py-32 lg-px-64 flex flex-col gap-32">
         {/* Logo */}
         <div className="flex flex-row justify-end">
@@ -13,20 +14,42 @@ export default function Login() {
 
         {/* Form Content */}
         <div className="flex flex-col align-center gap-44 flex-1">
-          <p className="text-large weight-700">Verse</p>
+          <p className="color-black text-large weight-700">Verse</p>
 
-          <div className="flex flex-row gap-16 justify-around bg-light-gray full-width p-4 border-radius">
-            <div className="login-slider">
-              <p className="text-center weight-500">Login</p>
+          <div className="flex flex-row justify-around bg-black full-width p-4 border-radius">
+            <div
+              className={`flex-1 p-2 cursor-pointer transition-all ${
+                isLogin ? "bg-white rounded-left" : "bg-black"
+              }`}
+              onClick={() => setIsLogin(true)}
+            >
+              <p
+                className={`text-center weight-500 ${
+                  isLogin ? "color-black" : "color-white"
+                }`}
+              >
+                Login
+              </p>
             </div>
 
-            <div className="flex-1">
-              <p className="text-center weight-500">Register</p>
+            <div
+              className={`flex-1 p-2 cursor-pointer transition-all ${
+                !isLogin ? "bg-white rounded-right" : "bg-black"
+              }`}
+              onClick={() => setIsLogin(false)}
+            >
+              <p
+                className={`text-center weight-500 ${
+                  !isLogin ? "color-black" : "color-white"
+                }`}
+              >
+                Register
+              </p>
             </div>
           </div>
 
           <div className="flex flex-col full-width gap-4">
-            <label className="weight-300" htmlFor="email">
+            <label className="color-black weight-300" htmlFor="email">
               Email address
             </label>
             <input
@@ -40,7 +63,7 @@ export default function Login() {
 
           <div className="flex flex-col full-width gap-16">
             <div className="flex flex-col gap-4">
-              <label className="weight-300" htmlFor="password">
+              <label className="color-black weight-300" htmlFor="password">
                 Password
               </label>
               <input
@@ -52,17 +75,37 @@ export default function Login() {
               />
             </div>
 
-            <div className="flex justify-end">
-              <p>Forgot Password?</p>
-            </div>
+            {isLogin && (
+              <div className="flex justify-end">
+                <p className="color-black">Forgot Password?</p>
+              </div>
+            )}
           </div>
 
+          {!isLogin && (
+            <div className="flex flex-col full-width gap-4">
+              <label
+                className="color-black weight-300"
+                htmlFor="confirmPassword"
+              >
+                Confirm Password
+              </label>
+              <input
+                className="text-input"
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+              />
+            </div>
+          )}
+
           <Link className="full-width login-btn" to="home">
-            Login
+            {isLogin ? "Login" : "Register"}
           </Link>
 
           <div className="flex flex-col gap-16">
-            <p className="weight-300">Other sign in options</p>
+            <p className="color-black weight-300">Other sign in options</p>
 
             <div className="flex flex-row gap-8">
               <img

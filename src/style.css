@@ -147,6 +147,11 @@ body {
   padding-bottom: 32px;
 }
 
+.py-48 {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
 .px-64 {
   padding-left: 64px;
   padding-right: 64px;
@@ -250,6 +255,10 @@ body {
   color: var(--white);
 }
 
+.color-black {
+  color: var(--black);
+}
+
 .svg-white {
   filter: brightness(0) invert(1);
 }
@@ -274,12 +283,18 @@ body {
   display: block;
 }
 
-.login-slider {
-  background-color: var(--white);
-  flex: 1;
-  border-radius: 10px;
-  padding: 2px 0px;
-  margin: 0px 0px 0px 1px;
+.rounded-left {
+  border-top-left-radius: 6px 6px;
+  border-bottom-left-radius: 6px 6px;
+}
+
+.rounded-right {
+  border-top-right-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .text-input {
@@ -344,6 +359,36 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+/* Slider Styles */
+.relative {
+  position: relative;
+}
+
+.slider-background {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.z-10 {
+  z-index: 1;
+}
+
+/* Transition effects */
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Ensure the toggle container has proper sizing */
+.full-width {
+  width: 100%;
 }
 
 /* Mobile Sidebar Styles */
