@@ -57,7 +57,7 @@ export default function Login() {
             </div>
           </div>
 
-          <Link className="full-width login-btn" to="homepage">
+          <Link className="full-width login-btn" to="home">
             Login
           </Link>
 

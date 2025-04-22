@@ -1,5 +1,7 @@
 import Navbar from "./components/Navbar";
-import Post from "./components/Post";
+import ImagePost from "./components/ImagePost";
+import TextPost from "./components/TextPost";
+import AudioPost from "./components/AudioPost";
 import BottomNavigation from "./components/BottomNavigation";
 
 export default function Homepage() {
@@ -9,14 +11,14 @@ export default function Homepage() {
       <Navbar />
 
       <div className="content-grid py-16">
-        <div className="container flex flex-col gap-16">
+        <div className="container flex flex-col gap-32">
           {/* Posts scrolling area */}
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          <ImagePost />
+          <ImagePost />
+          <TextPost />
+          <ImagePost />
+          <AudioPost />
+          <ImagePost />
         </div>
       </div>
 

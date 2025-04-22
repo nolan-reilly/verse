@@ -1,4 +1,4 @@
-export default function Post() {
+export default function TextPost() {
   return (
     <div className="max-width-512 mx-auto">
       <div className="bg-dark">
@@ -13,12 +13,16 @@ export default function Post() {
       </div>
 
       <div>
-        <div className="flex justify-center py-12">
-          <img
-            className="full-width border-radius"
-            src="post-images/01.jpg"
-            alt="image icon"
-          />
+        <div className="flex flex-col justify-center py-12">
+          <p className="text-extra-small">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+            quasi eos molestiae aspernatur et exercitationem eius voluptatem
+            dolorum veritatis ut quisquam, voluptas, soluta harum facilis
+            assumenda, voluptate reprehenderit. Fuga qui rerum aliquid
+            consequuntur architecto assumenda nobis quasi? Accusamus, similique
+            sapiente sint quis possimus suscipit veritatis voluptas. Ipsam
+            voluptatibus autem accusamus magni distinctio!
+          </p>
         </div>
       </div>
 
@@ -44,13 +48,6 @@ export default function Post() {
               alt="Message"
             />
           </div>
-        </div>
-
-        <div>
-          <p className="text-extra-small">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi,
-            quam. Atque minus accusantium magnam rerum, veniam laborum eius!
-          </p>
         </div>
       </div>
     </div>
