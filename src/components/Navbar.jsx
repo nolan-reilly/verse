@@ -61,9 +61,11 @@ export default function Navbar({
               {/* Permanent Following entry */}
               <div
                 className={`text-size-14 flex flex-row align-center justify-between py-8 px-8 ${
-                  "Following" === currentCommunity ? "active-community" : ""
+                  currentCommunity.name === "Following"
+                    ? "active-community"
+                    : ""
                 }`}
-                onClick={() => onSelectCommunity("Following")}
+                onClick={() => onSelectCommunity({ name: "Following" })}
               >
                 <div className="flex flex-row align-center gap-8">
                   <img className="svg-white width-24" src="./following.svg" />

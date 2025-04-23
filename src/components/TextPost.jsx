@@ -1,28 +1,16 @@
-export default function TextPost() {
+export default function TextPost({ userImageURL, text, username }) {
   return (
-    <div className="max-width-512 mx-auto">
+    <div className="max-width-512 flex flex-col gap-12 full-width mx-auto">
       <div className="bg-dark">
         <div className="flex flex-row align-center gap-8">
-          <img
-            className="profile-picture"
-            src="profile-picture-01.jpg"
-            alt="Profile"
-          />
-          <p className="text-small">Username</p>
+          <img className="profile-picture" src={userImageURL} alt="Profile" />
+          <p className="text-small">{username}</p>
         </div>
       </div>
 
       <div>
         <div className="flex flex-col justify-center py-12">
-          <p className="text-extra-small">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-            quasi eos molestiae aspernatur et exercitationem eius voluptatem
-            dolorum veritatis ut quisquam, voluptas, soluta harum facilis
-            assumenda, voluptate reprehenderit. Fuga qui rerum aliquid
-            consequuntur architecto assumenda nobis quasi? Accusamus, similique
-            sapiente sint quis possimus suscipit veritatis voluptas. Ipsam
-            voluptatibus autem accusamus magni distinctio!
-          </p>
+          <p className="text-extra-small">{text}</p>
         </div>
       </div>
 

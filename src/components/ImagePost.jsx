@@ -1,14 +1,15 @@
-export default function ImagePost() {
+export default function ImagePost({
+  imageURL,
+  userImageURL,
+  username,
+  description,
+}) {
   return (
     <div className="max-width-512 mx-auto">
       <div className="bg-dark">
         <div className="flex flex-row align-center gap-8">
-          <img
-            className="profile-picture"
-            src="profile-picture-01.jpg"
-            alt="Profile"
-          />
-          <p className="text-small">Username</p>
+          <img className="profile-picture" src={userImageURL} alt="Profile" />
+          <p className="text-small">{username}</p>
         </div>
       </div>
 
@@ -16,8 +17,8 @@ export default function ImagePost() {
         <div className="flex justify-center py-12">
           <img
             className="full-width border-radius"
-            src="post-images/01.jpg"
-            alt="image icon"
+            src={imageURL}
+            alt="Post image"
           />
         </div>
       </div>
@@ -48,8 +49,7 @@ export default function ImagePost() {
 
         <div>
           <p className="text-extra-small">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi,
-            quam. Atque minus accusantium magnam rerum, veniam laborum eius!
+            {description}... <span className="color-gray">more</span>
           </p>
         </div>
       </div>

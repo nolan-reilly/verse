@@ -2,7 +2,6 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import ImagePost from "./components/ImagePost";
 import TextPost from "./components/TextPost";
-import AudioPost from "./components/AudioPost";
 import BottomNavigation from "./components/BottomNavigation";
 
 export default function Homepage() {
@@ -43,32 +42,90 @@ export default function Homepage() {
 
   // Render different posts based on current community
   const renderCommunityContent = () => {
-    switch (currentCommunity) {
+    // Check the name property of the currentCommunity
+    switch (currentCommunity.name) {
       case "Following":
         return (
           <>
-            <ImagePost />
-            <ImagePost />
+            <ImagePost
+              imageUrl="post-images/01.jpg"
+              username="JaneDoe"
+              description="Just visited this amazing place! What do you think?"
+            />
+            <ImagePost
+              imageUrl="post-images/02.jpg"
+              username="JohnSmith"
+              description="My latest project. Took me three weeks to complete!"
+            />
             <TextPost />
-            <ImagePost />
-            <AudioPost />
-            <ImagePost />
+            <ImagePost
+              imageUrl="post-images/03.jpg"
+              username="TechEnthusiast"
+              description="Check out this new gadget I got yesterday."
+            />
+            <ImagePost
+              imageUrl="post-images/04.jpg"
+              username="TravelBug"
+              description="Sunset views from my recent trip to the coast."
+            />
           </>
         );
+
+      // TODO: Add post sections for each community
       case "Computer Science":
         return (
           <>
             <TextPost />
             <TextPost />
-            <ImagePost />
+            <ImagePost
+              imageUrl="post-images/coding.jpg"
+              username="CodeMaster"
+              description="My workspace for the new project. Clean code is happy code!"
+            />
           </>
         );
       case "Cats":
         return (
           <>
-            <ImagePost />
-            <ImagePost />
-            <AudioPost />
+            <ImagePost
+              imageURL="post-images/01.jpg"
+              userImageURL="profile-picture-01.jpg"
+              username="SushiTheCat"
+              description="Boom-cat activated! One spark of chaos, endless meow-nitions"
+            />
+
+            <ImagePost
+              imageURL="post-images/02.jpg"
+              userImageURL="profile-picture-02.jpg"
+              username="OracleOfPurrs"
+              description="Wizard cat conjures treats, disappears before"
+            />
+
+            <TextPost
+              userImageURL="profile-picture-02.jpg"
+              text="A cat’s love is earned, not given—making every head bump, slow blink, and lap snuggle a treasure. They’re part roommate, part therapist, and 100% adorable dictator. Life’s just better with whiskers in your face. 😻"
+              username="SirKnocksALot"
+            />
+
+            <ImagePost
+              imageURL="post-images/03.jpg"
+              userImageURL="profile-picture-03.jpg"
+              username="WhiskerWonder"
+              description="Waterproof kitty struts confidently through"
+            />
+
+            <TextPost
+              userImageURL="profile-picture-02.jpg"
+              text="Dual-colored cats are nature's perfect artwork—each patch tells a story! Their split faces, mismatched paws, and unique patterns make every one a living masterpiece. Two colors, double the purr-sonality! 🎨🐾"
+              username="FurryFriends"
+            />
+
+            <ImagePost
+              imageURL="post-images/05.jpg"
+              userImageURL="profile-picture-04.jpg"
+              username="InkAndWhiskers"
+              description="Disclaimer: This sophisticated gentleman"
+            />
           </>
         );
       default:
@@ -87,7 +144,7 @@ export default function Homepage() {
       />
 
       <div className="content-grid py-16">
-        <div className="container flex flex-col gap-32">
+        <div className="container flex flex-col gap-44">
           {renderCommunityContent()}
         </div>
       </div>
