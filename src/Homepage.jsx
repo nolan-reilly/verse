@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import ImagePost from "./components/ImagePost";
 import TextPost from "./components/TextPost";
 import BottomNavigation from "./components/BottomNavigation";
+import CommentsOverlay from "./components/CommentsOverlay";
 
 export default function Homepage() {
   // Initialize with Following as permanent community (without image)
@@ -145,10 +146,18 @@ export default function Homepage() {
         return (
           <>
             <ImagePost
-              imageURL="post-images/cs-02.jpg"
+              imageURL="post-images/cs-04.jpg"
               userImageURL="profile-pictures/cs-02.jpg"
               username="PC"
-              description="Keyboard clicks echo in empty"
+              description="Silicon dreams beneath blinking indicator lights"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-04.jpg"
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              username="TechDog"
+              description="Nose to the ground🦮, adventure in every"
               onCommentClick={() => setShowOverlay(true)}
             />
 
@@ -191,10 +200,10 @@ export default function Homepage() {
             />
 
             <ImagePost
-              imageURL="post-images/dog-04.jpg"
-              userImageURL="profile-pictures/dog-profile-01.jpg"
-              username="TechDog"
-              description="Nose to the ground🦮, adventure in every"
+              imageURL="post-images/cs-02.jpg"
+              userImageURL="profile-pictures/cs-02.jpg"
+              username="PC"
+              description="Keyboard clicks echo in empty"
               onCommentClick={() => setShowOverlay(true)}
             />
           </>
@@ -222,14 +231,6 @@ export default function Homepage() {
               userImageURL="profile-pictures/02.jpg"
               text="A cat’s love is earned, not given—making every head bump, slow blink, and lap snuggle a treasure. They’re part roommate, part therapist, and 100% adorable dictator. Life’s just better with whiskers in your face. 😻"
               username="SirKnocksALot"
-              onCommentClick={() => setShowOverlay(true)}
-            />
-
-            <ImagePost
-              imageURL="post-images/03.jpg"
-              userImageURL="profile-pictures/03.jpg"
-              username="WhiskerWonder"
-              description="Waterproof kitty struts confidently through"
               onCommentClick={() => setShowOverlay(true)}
             />
 
@@ -315,36 +316,10 @@ export default function Homepage() {
 
       <BottomNavigation />
 
-      {/* Comments Overlay */}
-      <div
-        className={`comment-overlay ${
-          showOverlay ? "comment-overlay-active" : ""
-        }`}
-      >
-        <div className="comment-content flex flex-col p-16">
-          <div className="comment-header">
-            <div className="flex flex-row align-center justify-between p-16">
-              <h2>Comments</h2>
-              <button
-                className="close-btn"
-                onClick={() => setShowOverlay(false)}
-              >
-                ✕
-              </button>
-            </div>
-            <hr />
-          </div>
-
-          <div className="overlay-comments p-16">
-            {/* Scrollable comments content */}
-            {Array.from({ length: 50 }).map((_, i) => (
-              <div key={i} className="py-8">
-                <p>Comment {i + 1}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <CommentsOverlay
+        isOpen={showOverlay}
+        onClose={() => setShowOverlay(false)}
+      />
     </div>
   );
 }
