@@ -141,7 +141,6 @@ export default function Homepage() {
           </>
         );
 
-      // TODO: Add post sections for each community
       case "Computer Science":
         return (
           <>
