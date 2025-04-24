@@ -48,25 +48,70 @@ export default function Homepage() {
         return (
           <>
             <ImagePost
-              imageUrl="post-images/01.jpg"
-              username="JaneDoe"
-              description="Just visited this amazing place! What do you think?"
+              imageURL="post-images/cs-01.jpg"
+              userImageURL="profile-pictures/cs-01.jpg"
+              username="pypg12"
+              description="Code runs silently through digital veins 💻"
             />
+
             <ImagePost
-              imageUrl="post-images/02.jpg"
-              username="JohnSmith"
-              description="My latest project. Took me three weeks to complete!"
+              imageURL="post-images/01.jpg"
+              userImageURL="profile-pictures/01.jpg"
+              username="SushiTheCat"
+              description="Boom-cat activated! One spark of chaos, endless meow-nitions"
             />
-            <TextPost />
-            <ImagePost
-              imageUrl="post-images/03.jpg"
-              username="TechEnthusiast"
-              description="Check out this new gadget I got yesterday."
+
+            <TextPost
+              userImageURL="profile-pictures/02.jpg"
+              text="Dual-colored cats are nature's perfect artwork—each patch tells a story! Their split faces, mismatched paws, and unique patterns make every one a living masterpiece. Two colors, double the purr-sonality! 🎨🐾"
+              username="FurryFriends"
             />
+
             <ImagePost
-              imageUrl="post-images/04.jpg"
-              username="TravelBug"
-              description="Sunset views from my recent trip to the coast."
+              imageURL="post-images/cs-02.jpg"
+              userImageURL="profile-pictures/cs-02.jpg"
+              username="PC"
+              description="Keyboard clicks echo in empty"
+            />
+
+            <ImagePost
+              imageURL="post-images/cs-03.jpg"
+              userImageURL="profile-pictures/cs-03.jpg"
+              username="AverageLinuxUser"
+              description="RAM never forgets until power dies 🔌"
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-01.jpg"
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              username="TechDog"
+              description="agging tails tell stories that words could never express 🐕"
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-02.jpg"
+              userImageURL="profile-pictures/dog-profile-02.jpg"
+              username="DogLover11"
+              description="Loyal companions who know your heart"
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              text="Digital pioneer with a canine spirit, techdog navigates cyberspace with playful curiosity and unwavering loyalty, sniffing out solutions where others see only obstacles. 🐕‍🦺💻"
+              username="TechDog"
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/02.jpg"
+              text="A community-driven powerhouse, this Linux distribution balances bleeding-edge innovation with rock-solid stability. Its package management system works like magic 🪄, while the terminal becomes a playground for tech enthusiasts and system administrators alike. 🐧 Freedom and customization reign supreme in this open-source kingdom. 💻"
+              username="AverageLinuxUser"
+            />
+
+            <ImagePost
+              imageURL="post-images/cs-02.jpg"
+              userImageURL="profile-pictures/cs-02.jpg"
+              username="PC"
+              description="Keyboard clicks echo in empty"
             />
           </>
         );
@@ -75,12 +120,51 @@ export default function Homepage() {
       case "Computer Science":
         return (
           <>
-            <TextPost />
-            <TextPost />
             <ImagePost
-              imageUrl="post-images/coding.jpg"
-              username="CodeMaster"
-              description="My workspace for the new project. Clean code is happy code!"
+              imageURL="post-images/cs-01.jpg"
+              userImageURL="profile-pictures/cs-01.jpg"
+              username="pypg12"
+              description="Code runs silently through digital veins 💻"
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/02.jpg"
+              text="A community-driven powerhouse, this Linux distribution balances bleeding-edge innovation with rock-solid stability. Its package management system works like magic 🪄, while the terminal becomes a playground for tech enthusiasts and system administrators alike. 🐧 Freedom and customization reign supreme in this open-source kingdom. 💻"
+              username="AverageLinuxUser"
+            />
+
+            <ImagePost
+              imageURL="post-images/cs-02.jpg"
+              userImageURL="profile-pictures/cs-02.jpg"
+              username="PC"
+              description="Keyboard clicks echo in empty"
+            />
+
+            <ImagePost
+              imageURL="post-images/cs-03.jpg"
+              userImageURL="profile-pictures/cs-03.jpg"
+              username="AverageLinuxUser"
+              description="RAM never forgets until power dies 🔌"
+            />
+
+            <ImagePost
+              imageURL="post-images/cs-04.jpg"
+              userImageURL="profile-pictures/cs-02.jpg"
+              username="PC"
+              description="Silicon dreams beneath blinking indicator lights"
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/cs-01.jpg"
+              text="Python and PostgreSQL form a powerful alliance in modern development. Python's elegant syntax and versatile libraries harmonize perfectly with PostgreSQL's robust relational database capabilities. Together, they enable everything from data analysis to web applications, offering reliability, scalability, and performance. This dynamic duo empowers developers to build sophisticated systems with clean code and structured data storage."
+              username="pypg12"
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-04.jpg"
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              username="TechDog"
+              description="Nose to the ground🦮, adventure in every"
             />
           </>
         );
@@ -89,42 +173,80 @@ export default function Homepage() {
           <>
             <ImagePost
               imageURL="post-images/01.jpg"
-              userImageURL="profile-picture-01.jpg"
+              userImageURL="profile-pictures/01.jpg"
               username="SushiTheCat"
               description="Boom-cat activated! One spark of chaos, endless meow-nitions"
             />
 
             <ImagePost
               imageURL="post-images/02.jpg"
-              userImageURL="profile-picture-02.jpg"
+              userImageURL="profile-pictures/02.jpg"
               username="OracleOfPurrs"
               description="Wizard cat conjures treats, disappears before"
             />
 
             <TextPost
-              userImageURL="profile-picture-02.jpg"
+              userImageURL="profile-pictures/02.jpg"
               text="A cat’s love is earned, not given—making every head bump, slow blink, and lap snuggle a treasure. They’re part roommate, part therapist, and 100% adorable dictator. Life’s just better with whiskers in your face. 😻"
               username="SirKnocksALot"
             />
 
             <ImagePost
               imageURL="post-images/03.jpg"
-              userImageURL="profile-picture-03.jpg"
+              userImageURL="profile-pictures/03.jpg"
               username="WhiskerWonder"
               description="Waterproof kitty struts confidently through"
             />
 
             <TextPost
-              userImageURL="profile-picture-02.jpg"
+              userImageURL="profile-pictures/02.jpg"
               text="Dual-colored cats are nature's perfect artwork—each patch tells a story! Their split faces, mismatched paws, and unique patterns make every one a living masterpiece. Two colors, double the purr-sonality! 🎨🐾"
               username="FurryFriends"
             />
 
             <ImagePost
               imageURL="post-images/05.jpg"
-              userImageURL="profile-picture-04.jpg"
+              userImageURL="profile-pictures/04.jpg"
               username="InkAndWhiskers"
               description="Disclaimer: This sophisticated gentleman"
+            />
+          </>
+        );
+      case "Dogs":
+        return (
+          <>
+            <ImagePost
+              imageURL="post-images/dog-01.jpg"
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              username="TechDog"
+              description="agging tails tell stories that words could never express 🐕"
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-02.jpg"
+              userImageURL="profile-pictures/dog-profile-02.jpg"
+              username="DogLover11"
+              description="Loyal companions who know your heart"
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              text="Digital pioneer with a canine spirit, techdog navigates cyberspace with playful curiosity and unwavering loyalty, sniffing out solutions where others see only obstacles. 🐕‍🦺💻"
+              username="TechDog"
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-03.jpg"
+              userImageURL="profile-pictures/dog-profile-03.jpg"
+              username="TerrierJoe33"
+              description="Ancient partnership forged through millennia of"
+            />
+
+            <ImagePost
+              imageURL="post-images/dog-04.jpg"
+              userImageURL="profile-pictures/dog-profile-01.jpg"
+              username="TechDog"
+              description="Nose to the ground🦮, adventure in every"
             />
           </>
         );
