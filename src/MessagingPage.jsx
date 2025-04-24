@@ -4,21 +4,36 @@ import TextMessage from "./components/TextMessage";
 import ImageMessage from "./components/ImageMessage";
 
 export default function MessagingPage() {
+  //this is the state for the messages that are sent and received in the chat
+  const [messages, setMessages] = useState([
+    { type: "text", isUser: false, content: "Hello, how are you?" },
+    { type: "text", isUser: true, content: "poggers bro" },
+    { type: "text", isUser: false, content: "look at this cool picture" },
+    { type: "image", isUser: false, content: "post-images/01.jpg" },
+    { type: "text", isUser: true, content: "wow that's awesome!" },
+  ]);
+
+  const [inputText, setInputText] = useState("");
+
   const sendMessage = () => {
-    //TODO: Implement send message functionality
-  }
+    if (inputText.trim() === "") return;
+
+    setMessages([...messages, { type: "text", isUser: true, context: inputText}]);
+
+    setInputText("");
+  };
 
   return (
     <div>
       {/* Navbar for mobile messaging */}
       <div className="navbar bg-light-black">
         <nav className="container flex flex-row justify-between align-center py-24">
-          {/* Back button to navigate to the inbox page  (ask nolan ab where to get the svg)*/}
+          {/* Back button to navigate to the inbox page */}
           <Link to="/inbox">
             <div className="position-relative">
               <img
                 className="width-32 svg-white"
-                src="./back-arrow.svg"
+                src="./backarrow.svg"
                 alt="Back"
               />
             </div>
@@ -30,10 +45,10 @@ export default function MessagingPage() {
             <p className="text-small weight-700">User</p>
           </div>
 
-          {/* plus to send a specific post to a user (ask nolan ab where to get the svg)*/}
+          {/* plus to send a specific post to a user */}
           <img
             className="width-32 svg-white"
-            src="./plus.svg"
+            src="./plusnobox.svg"
             alt="Send Post"
           />
         </nav>
@@ -42,12 +57,23 @@ export default function MessagingPage() {
       {/* Main messaging area */}
       <div className="message-grid py-16">
         <div classname="container flex flex-col gap-32">
-          {/* Message container (where the conversation actually is) */}
-            <TextMessage isUser={false} message="Hello, how are you?" />
-            <TextMessage isUser={true} message="poggers bro" />
-            <TextMessage isUser={false} message="look at this cool picture" />
-            <ImageMessage isUser={false} imgmsg="post-images/01.jpg" />
-            <TextMessage isUser={true} message="wow that's awesome!" />
+          {/* Message container (where the conversation actually is)
+          determines if if message is a TextMessage or an ImageMessage */}
+            {messages.map((message, index) =>
+            message.type === "text" ? (
+              <TextMessage
+                key={index}
+                isUser={message.isUser}
+                message={message.content}
+              />
+            ) : (
+              <ImageMessage
+                key={index}
+                isUser={message.isUser}
+                imageSrc={message.content}
+              />
+            )
+          )}
         </div>
       </div>
 
@@ -59,12 +85,14 @@ export default function MessagingPage() {
             type="text"
             className="message-input"
             placeholder="Message..."
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
           />
 
           {/* Send button */}
           <img
             className="width-32 svg-white"
-            src="./send.svg"
+            src="./message.svg"
             alt="Send Message"
             onClick={sendMessage}
           />
