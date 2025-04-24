@@ -3,6 +3,7 @@ export default function ImagePost({
   userImageURL,
   username,
   description,
+  onCommentClick,
 }) {
   return (
     <div className="max-width-512 mx-auto">
@@ -30,6 +31,7 @@ export default function ImagePost({
               className="width-24 svg-white"
               src="./comment.svg"
               alt="Message"
+              onClick={onCommentClick}
             />
             <img
               className="width-24 svg-white"

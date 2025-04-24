@@ -159,6 +159,14 @@ body {
   padding: 8px;
 }
 
+.p-16 {
+  padding: 16px;
+}
+
+.pt-16 {
+  padding-top: 16px;
+}
+
 .py-8 {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -211,6 +219,10 @@ body {
 .my-24 {
   margin-top: 24px;
   margin-bottom: 24px;
+}
+
+.max-width-512 {
+  max-width: 512px;
 }
 
 .width-18 {
@@ -287,6 +299,66 @@ body {
 
 .weight-700 {
   font-weight: 700;
+}
+
+/* Comment Overlay Styles */
+.comment-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60vh;
+  background-color: var(--medium-black);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 2000;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  overflow: hidden;
+}
+
+.comment-overlay-active {
+  transform: translateY(0);
+}
+
+.comment-content {
+  height: 100%;
+}
+
+.comment-header {
+  position: sticky;
+  background-color: var(--medium-black);
+  top: 0;
+  z-index: 1;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--white);
+}
+
+.body-no-scroll {
+  overflow: hidden;
+}
+
+.overlay-comments {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.comment-icon {
+  cursor: pointer;
+}
+
+.comment {
+  padding: 8px 0;
+}
+
+.comment:last-child {
+  border-bottom: none;
 }
 
 .bg-white {
@@ -483,7 +555,7 @@ body.sidebar-open {
   right: 0;
   background-color: var(--medium-black);
   border-top: 1px solid var(--light-black);
-  z-index: 1000;
+  z-index: 999;
 }
 
 .nav-item {

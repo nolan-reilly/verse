@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import ImagePost from "./components/ImagePost";
 import TextPost from "./components/TextPost";
@@ -33,6 +33,20 @@ export default function Homepage() {
     name: "Following",
   });
 
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  // Prevent body scrolling when overlay is open
+  useEffect(() => {
+    if (showOverlay) {
+      document.body.classList.add("body-no-scroll");
+    } else {
+      document.body.classList.remove("body-no-scroll");
+    }
+
+    // Cleanup on component unmount
+    return () => document.body.classList.remove("body-no-scroll");
+  }, [showOverlay]);
+
   const handleAddCommunity = (community) => {
     setSelectedCommunities([...selectedCommunities, community]);
     setAvailableCommunities(
@@ -52,6 +66,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-01.jpg"
               username="pypg12"
               description="Code runs silently through digital veins 💻"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -59,12 +74,14 @@ export default function Homepage() {
               userImageURL="profile-pictures/01.jpg"
               username="SushiTheCat"
               description="Boom-cat activated! One spark of chaos, endless meow-nitions"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/02.jpg"
               text="Dual-colored cats are nature's perfect artwork—each patch tells a story! Their split faces, mismatched paws, and unique patterns make every one a living masterpiece. Two colors, double the purr-sonality! 🎨🐾"
               username="FurryFriends"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -72,6 +89,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-02.jpg"
               username="PC"
               description="Keyboard clicks echo in empty"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -79,6 +97,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-03.jpg"
               username="AverageLinuxUser"
               description="RAM never forgets until power dies 🔌"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -86,6 +105,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-01.jpg"
               username="TechDog"
               description="agging tails tell stories that words could never express 🐕"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -93,18 +113,21 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-02.jpg"
               username="DogLover11"
               description="Loyal companions who know your heart"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/dog-profile-01.jpg"
               text="Digital pioneer with a canine spirit, techdog navigates cyberspace with playful curiosity and unwavering loyalty, sniffing out solutions where others see only obstacles. 🐕‍🦺💻"
               username="TechDog"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/02.jpg"
               text="A community-driven powerhouse, this Linux distribution balances bleeding-edge innovation with rock-solid stability. Its package management system works like magic 🪄, while the terminal becomes a playground for tech enthusiasts and system administrators alike. 🐧 Freedom and customization reign supreme in this open-source kingdom. 💻"
               username="AverageLinuxUser"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -112,6 +135,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-02.jpg"
               username="PC"
               description="Keyboard clicks echo in empty"
+              onCommentClick={() => setShowOverlay(true)}
             />
           </>
         );
@@ -121,23 +145,26 @@ export default function Homepage() {
         return (
           <>
             <ImagePost
-              imageURL="post-images/cs-01.jpg"
-              userImageURL="profile-pictures/cs-01.jpg"
-              username="pypg12"
-              description="Code runs silently through digital veins 💻"
+              imageURL="post-images/cs-02.jpg"
+              userImageURL="profile-pictures/cs-02.jpg"
+              username="PC"
+              description="Keyboard clicks echo in empty"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/02.jpg"
               text="A community-driven powerhouse, this Linux distribution balances bleeding-edge innovation with rock-solid stability. Its package management system works like magic 🪄, while the terminal becomes a playground for tech enthusiasts and system administrators alike. 🐧 Freedom and customization reign supreme in this open-source kingdom. 💻"
               username="AverageLinuxUser"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
-              imageURL="post-images/cs-02.jpg"
-              userImageURL="profile-pictures/cs-02.jpg"
-              username="PC"
-              description="Keyboard clicks echo in empty"
+              imageURL="post-images/cs-01.jpg"
+              userImageURL="profile-pictures/cs-01.jpg"
+              username="pypg12"
+              description="Code runs silently through digital veins 💻"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -145,6 +172,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-03.jpg"
               username="AverageLinuxUser"
               description="RAM never forgets until power dies 🔌"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -152,12 +180,14 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-02.jpg"
               username="PC"
               description="Silicon dreams beneath blinking indicator lights"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/cs-01.jpg"
               text="Python and PostgreSQL form a powerful alliance in modern development. Python's elegant syntax and versatile libraries harmonize perfectly with PostgreSQL's robust relational database capabilities. Together, they enable everything from data analysis to web applications, offering reliability, scalability, and performance. This dynamic duo empowers developers to build sophisticated systems with clean code and structured data storage."
               username="pypg12"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -165,6 +195,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-01.jpg"
               username="TechDog"
               description="Nose to the ground🦮, adventure in every"
+              onCommentClick={() => setShowOverlay(true)}
             />
           </>
         );
@@ -176,6 +207,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/01.jpg"
               username="SushiTheCat"
               description="Boom-cat activated! One spark of chaos, endless meow-nitions"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -183,12 +215,14 @@ export default function Homepage() {
               userImageURL="profile-pictures/02.jpg"
               username="OracleOfPurrs"
               description="Wizard cat conjures treats, disappears before"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/02.jpg"
               text="A cat’s love is earned, not given—making every head bump, slow blink, and lap snuggle a treasure. They’re part roommate, part therapist, and 100% adorable dictator. Life’s just better with whiskers in your face. 😻"
               username="SirKnocksALot"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -196,12 +230,14 @@ export default function Homepage() {
               userImageURL="profile-pictures/03.jpg"
               username="WhiskerWonder"
               description="Waterproof kitty struts confidently through"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/02.jpg"
               text="Dual-colored cats are nature's perfect artwork—each patch tells a story! Their split faces, mismatched paws, and unique patterns make every one a living masterpiece. Two colors, double the purr-sonality! 🎨🐾"
               username="FurryFriends"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -209,6 +245,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/04.jpg"
               username="InkAndWhiskers"
               description="Disclaimer: This sophisticated gentleman"
+              onCommentClick={() => setShowOverlay(true)}
             />
           </>
         );
@@ -220,6 +257,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-01.jpg"
               username="TechDog"
               description="agging tails tell stories that words could never express 🐕"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -227,12 +265,14 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-02.jpg"
               username="DogLover11"
               description="Loyal companions who know your heart"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <TextPost
               userImageURL="profile-pictures/dog-profile-01.jpg"
               text="Digital pioneer with a canine spirit, techdog navigates cyberspace with playful curiosity and unwavering loyalty, sniffing out solutions where others see only obstacles. 🐕‍🦺💻"
               username="TechDog"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -240,6 +280,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-03.jpg"
               username="TerrierJoe33"
               description="Ancient partnership forged through millennia of"
+              onCommentClick={() => setShowOverlay(true)}
             />
 
             <ImagePost
@@ -247,6 +288,7 @@ export default function Homepage() {
               userImageURL="profile-pictures/dog-profile-01.jpg"
               username="TechDog"
               description="Nose to the ground🦮, adventure in every"
+              onCommentClick={() => setShowOverlay(true)}
             />
           </>
         );
@@ -272,6 +314,37 @@ export default function Homepage() {
       </div>
 
       <BottomNavigation />
+
+      {/* Comments Overlay */}
+      <div
+        className={`comment-overlay ${
+          showOverlay ? "comment-overlay-active" : ""
+        }`}
+      >
+        <div className="comment-content flex flex-col p-16">
+          <div className="comment-header">
+            <div className="flex flex-row align-center justify-between p-16">
+              <h2>Comments</h2>
+              <button
+                className="close-btn"
+                onClick={() => setShowOverlay(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <hr />
+          </div>
+
+          <div className="overlay-comments p-16">
+            {/* Scrollable comments content */}
+            {Array.from({ length: 50 }).map((_, i) => (
+              <div key={i} className="py-8">
+                <p>Comment {i + 1}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

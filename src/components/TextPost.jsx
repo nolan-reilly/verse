@@ -1,4 +1,9 @@
-export default function TextPost({ userImageURL, text, username }) {
+export default function TextPost({
+  userImageURL,
+  text,
+  username,
+  onCommentClick,
+}) {
   return (
     <div className="max-width-512 flex flex-col gap-12 full-width mx-auto">
       <div className="bg-dark">
@@ -21,6 +26,7 @@ export default function TextPost({ userImageURL, text, username }) {
               className="width-24 svg-white"
               src="./comment.svg"
               alt="Message"
+              onClick={onCommentClick}
             />
             <img
               className="width-24 svg-white"
