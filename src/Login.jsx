@@ -6,7 +6,7 @@ export default function Login() {
 
   return (
     <div className="bg-white lg-flex vh-100 relative overflow-hidden">
-      <div className="container py-32 lg-px-64 flex flex-col gap-32">
+      <div className="container py-24 lg-px-64 flex flex-col gap-32">
         {/* Logo */}
         <div className="flex flex-row justify-end">
           <img className="width-48" src="./star.svg" alt="Star" />
@@ -16,10 +16,10 @@ export default function Login() {
         <div className="flex flex-col align-center gap-44 flex-1">
           <p className="color-black text-large weight-700">Verse</p>
 
-          <div className="flex flex-row justify-around bg-black full-width p-8 rounded-xl">
+          <div className="flex flex-row justify-around bg-black full-width p-8 py-8 rounded">
             <div
-              className={`flex-1 p-2 cursor-pointer ${
-                isLogin ? "bg-white rounded-lg" : "bg-black"
+              className={`flex-1 py-8 font-bold ${
+                isLogin ? "bg-white rounded" : "bg-black"
               }`}
               onClick={() => setIsLogin(true)}
             >
@@ -33,8 +33,8 @@ export default function Login() {
             </div>
 
             <div
-              className={`flex-1 p-2 cursor-pointer ${
-                !isLogin ? "bg-white rounded-lg" : "bg-black"
+              className={`flex-1 py-8 font-bold ${
+                !isLogin ? "bg-white rounded" : "bg-black"
               }`}
               onClick={() => setIsLogin(false)}
             >
