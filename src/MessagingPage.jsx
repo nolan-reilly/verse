@@ -76,8 +76,8 @@ export default function MessagingPage() {
         </nav>
       </div>
 
-      <div className="message-grid py-16 flex-1" style={{ overflowY: "auto" }}>
-        <div className="container flex flex-col gap-32">
+      <div className="py-16 flex-1" style={{ overflowY: "auto" }}>
+        <div className="container flex flex-col gap-16">
           {messages.map((message, index) =>
             message.type === "text" ? (
               <TextMessage

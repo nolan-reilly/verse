@@ -45,7 +45,7 @@ export default function BottomNavigation() {
             onClick={() => handleTabClick("create")}
           >
             <div className="flex justify-center align-center">
-              <Link to="/create">
+              <Link to="#">
                 <img
                   className="width-24 svg-white"
                   src="./create.svg"

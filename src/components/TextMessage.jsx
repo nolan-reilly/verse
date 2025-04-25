@@ -19,7 +19,7 @@ export default function TextMessage({ isUser, message }) {
       <div className="flex flex-row align-center gap-12">
         {/* Message Bubble */}
         <div
-          className={`text-extra-small py-8 px-12 rounded ${
+          className={`text-extra-small py-6 px-8 rounded ${
             isUser ? "bg-blue text-white ml-auto" : "bg-light-black text-black"
           }`}
         >
