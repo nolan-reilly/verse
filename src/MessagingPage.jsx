@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import TextMessage from "./components/TextMessage";
 import ImageMessage from "./components/ImageMessage";
 
 export default function MessagingPage() {
-  //this is the state for the messages that are sent and received in the chat
   const [messages, setMessages] = useState([
     { type: "text", isUser: false, content: "Hello, how are you?" },
     { type: "text", isUser: true, content: "poggers bro" },
@@ -18,7 +17,7 @@ export default function MessagingPage() {
   const sendMessage = () => {
     if (inputText.trim() === "") return;
 
-    setMessages([...messages, { type: "text", isUser: true, context: inputText}]);
+    setMessages([...messages, { type: "text", isUser: true, content: inputText }]);
 
     setInputText("");
   };
@@ -28,7 +27,6 @@ export default function MessagingPage() {
       {/* Navbar for mobile messaging */}
       <div className="navbar bg-light-black">
         <nav className="container flex flex-row justify-between align-center py-24">
-          {/* Back button to navigate to the inbox page */}
           <Link to="/inbox">
             <div className="position-relative">
               <img
@@ -39,13 +37,11 @@ export default function MessagingPage() {
             </div>
           </Link>
 
-          {/* User profile and profile picture */}
-          <div className = "flex flex-row align-center">
-            <img className="profile-picture" src="profile-picture-01.jpg" alt="Profile" />
+          <div className="flex flex-row align-center gap-8">
+            <img className="profile-picture" src="profile-picture-02.jpg" alt="Profile" />
             <p className="text-small weight-700">User</p>
           </div>
 
-          {/* plus to send a specific post to a user */}
           <img
             className="width-32 svg-white"
             src="./plusnobox.svg"
@@ -56,10 +52,8 @@ export default function MessagingPage() {
 
       {/* Main messaging area */}
       <div className="message-grid py-16">
-        <div classname="container flex flex-col gap-32">
-          {/* Message container (where the conversation actually is)
-          determines if if message is a TextMessage or an ImageMessage */}
-            {messages.map((message, index) =>
+        <div className="container flex flex-col gap-32">
+          {messages.map((message, index) =>
             message.type === "text" ? (
               <TextMessage
                 key={index}
@@ -70,7 +64,7 @@ export default function MessagingPage() {
               <ImageMessage
                 key={index}
                 isUser={message.isUser}
-                imageSrc={message.content}
+                imgmsg={message.content}
               />
             )
           )}
@@ -80,16 +74,14 @@ export default function MessagingPage() {
       {/* Bottom messaging area */}
       <div className="bottom-message-area bg-light-black">
         <div className="container flex flex-row align-center gap-16 py-16">
-          {/* Text input for sending messages */}
           <input
             type="text"
             className="message-input"
             placeholder="Message..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
+            style={{ color: "black", flexGrow: 1 }}
           />
-
-          {/* Send button */}
           <img
             className="width-32 svg-white"
             src="./message.svg"
