@@ -78,6 +78,14 @@ export default function Homepage() {
               onCommentClick={() => setShowOverlay(true)}
             />
 
+            <ImagePost
+              imageURL="post-images/exercise-02.jpg"
+              userImageURL="profile-pictures/exercise-profile-02.jpg"
+              username="ShinjiIkari"
+              description="Early morning workout before the crowds arrive"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
             <TextPost
               userImageURL="profile-pictures/02.jpg"
               text="Dual-colored cats are nature's perfect artwork—each patch tells a story! Their split faces, mismatched paws, and unique patterns make every one a living masterpiece. Two colors, double the purr-sonality! 🎨🐾"
@@ -90,6 +98,13 @@ export default function Homepage() {
               userImageURL="profile-pictures/cs-02.jpg"
               username="PC"
               description="Keyboard clicks echo in empty"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/exercise-profile-02.jpg"
+              text="Today's upper body session was intense. Bench press followed by dumbbell flyes really hit my chest. Supersetted bicep curls with tricep extensions to save time. Arms feel like jelly now, but I'm seeing progress in the mirror. Protein shake time – gotta feed these muscles!"
+              username="ShinjiIkari"
               onCommentClick={() => setShowOverlay(true)}
             />
 
@@ -128,6 +143,14 @@ export default function Homepage() {
               userImageURL="profile-pictures/02.jpg"
               text="A community-driven powerhouse, this Linux distribution balances bleeding-edge innovation with rock-solid stability. Its package management system works like magic 🪄, while the terminal becomes a playground for tech enthusiasts and system administrators alike. 🐧 Freedom and customization reign supreme in this open-source kingdom. 💻"
               username="AverageLinuxUser"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <ImagePost
+              imageURL="post-images/exercise-01.jpg"
+              userImageURL="profile-pictures/exercise-profile-01.jpg"
+              username="GymFreak"
+              description="Pushing through one more rep when muscles burn 💪"
               onCommentClick={() => setShowOverlay(true)}
             />
 
@@ -288,10 +311,56 @@ export default function Homepage() {
         return (
           <>
             <ImagePost
-              imageURL="post-images/dog-03.jpg"
-              userImageURL="profile-pictures/dog-profile-03.jpg"
-              username="TerrierJoe33"
-              description="Ancient partnership forged through millennia of"
+              imageURL="post-images/exercise-01.jpg"
+              userImageURL="profile-pictures/exercise-profile-01.jpg"
+              username="GymFreak"
+              description="Pushing through one more rep when muscles burn 💪"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <ImagePost
+              imageURL="post-images/exercise-02.jpg"
+              userImageURL="profile-pictures/exercise-profile-02.jpg"
+              username="ShinjiIkari"
+              description="Early morning workout before the crowds arrive"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/exercise-profile-02.jpg"
+              text="Today's upper body session was intense. Bench press followed by dumbbell flyes really hit my chest. Supersetted bicep curls with tricep extensions to save time. Arms feel like jelly now, but I'm seeing progress in the mirror. Protein shake time – gotta feed these muscles!"
+              username="ShinjiIkari"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <ImagePost
+              imageURL="post-images/exercise-03.jpg"
+              userImageURL="profile-pictures/exercise-profile-03.jpg"
+              username="KittenLifter"
+              description="Chalk-covered hands gripping the barbell with determination"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <ImagePost
+              imageURL="post-images/exercise-04.jpg"
+              userImageURL="profile-pictures/exercise-profile-01.jpg"
+              username="GymFreak"
+              description="The satisfying clang of weights hitting floor 🏋️‍♀️"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <TextPost
+              userImageURL="profile-pictures/exercise-profile-01.jpg"
+              text="Just crushed leg day! Started with squats, pushed through 4 sets and felt that burn. Moved to lunges and leg press, then finished with calf raises. My quads are already screaming, but that post-workout endorphin rush makes it worth it. Definitely going to feel this tomorrow!"
+              username="GymFreak"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+
+            <ImagePost
+              imageURL="post-images/exercise-05.jpg"
+              userImageURL="profile-pictures/exercise-profile-02.jpg"
+              username="ShinjiIkari"
+              description="Supportive community cheering each other's personal bests 🙌"
               onCommentClick={() => setShowOverlay(true)}
             />
           </>
