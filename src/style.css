@@ -428,6 +428,7 @@ body.sidebar-open {
   border-radius: 8px;
 }
 
+
 /* Content grid now simplified for mobile only */
 .content-grid {
   padding-bottom: 96px;
@@ -443,7 +444,6 @@ body.sidebar-open {
 .rounded-box {
   border-radius: 12px;
   padding: 16px;
-  height: 80px;
   background-color: var(--medium-black);
 }
 
@@ -474,4 +474,11 @@ body.sidebar-open {
   color: var(--white);
   text-align: center;
   align-items: center;
+}
+
+.active-button {
+  background-color: var(--primary-color); /* Highlight active button */
+  color: white; /* Change text color */
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3); /* Indented effect */
+  transform: translateY(2px); /* Slightly "pressed" appearance */
 }
