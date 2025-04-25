@@ -368,6 +368,22 @@ body {
   overflow: hidden;
 }
 
+@keyframes bookmark-scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bookmark-animation {
+  animation: bookmark-scale 0.3s ease;
+}
+
 /* Form Elements */
 input {
   color: black;

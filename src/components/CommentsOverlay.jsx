@@ -41,7 +41,7 @@ export default function CommentsOverlay({ isOpen, onClose }) {
     if (newComment.trim()) {
       const comment = {
         id: Date.now(),
-        author: "CurrentUser",
+        author: "User",
         text: newComment,
         replies: [],
       };
