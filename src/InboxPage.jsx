@@ -15,7 +15,7 @@ export default function InboxPage() {
       {/*I just copied what Sean had here*/}
       <div className="navbar bg-light-black">
         <nav className="container flex flex-row justify-between align-center py-24">
-          <Link to="/inbox">
+          <Link to="/home">
             <div className="position-relative">
               <img
                 className="width-32 svg-white"
@@ -38,8 +38,18 @@ export default function InboxPage() {
         </nav>
       </div>
 
-      <div className="bg-light-gray flex flex-col align-center gap-16 padding-16">
-        <p>Search bar here</p>
+      <div className="bg-light-gray flex flex-row align-center gap-16 padding-16 relative text-input">
+          <img
+            className="width-16 svg-gray"
+            src="./search.svg"
+            alt="Search"
+            style={{position: 'absolute', left: '18px', width: '24px'}}
+          />
+          <input 
+            className="full-width"
+            style={{paddingLeft: '28px', color: 'gray'}}
+            placeholder="Search...">
+          </input>
       </div>
 
       <div className="bg-dark-black flex flex-col align-center margin-8 gap-8 padding-48">
