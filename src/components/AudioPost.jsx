@@ -1,7 +1,9 @@
-export default function AudioPost() {
+export default function AudioPost(pathToAudio) {
   return (
     <div>
-      <p>Audio Post</p>
+      <audio controls>
+        <source src="/path/to/your-audio-file.mp3" type="audio/mpeg" />
+      </audio>
     </div>
   );
 }
