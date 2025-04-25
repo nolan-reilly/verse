@@ -48,7 +48,7 @@ export default function BottomNavigation() {
               <Link to="/create">
                 <img
                   className="width-24 svg-white"
-                  src="./plus.svg"
+                  src="./create.svg"
                   alt="Create"
                 />
               </Link>

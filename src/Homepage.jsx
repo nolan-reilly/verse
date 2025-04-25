@@ -183,14 +183,6 @@ export default function Homepage() {
               onCommentClick={() => setShowOverlay(true)}
             />
 
-            <ImagePost
-              imageURL="post-images/cs-04.jpg"
-              userImageURL="profile-pictures/cs-02.jpg"
-              username="PC"
-              description="Silicon dreams beneath blinking indicator lights"
-              onCommentClick={() => setShowOverlay(true)}
-            />
-
             <TextPost
               userImageURL="profile-pictures/cs-01.jpg"
               text="Python and PostgreSQL form a powerful alliance in modern development. Python's elegant syntax and versatile libraries harmonize perfectly with PostgreSQL's robust relational database capabilities. Together, they enable everything from data analysis to web applications, offering reliability, scalability, and performance. This dynamic duo empowers developers to build sophisticated systems with clean code and structured data storage."
@@ -292,8 +284,18 @@ export default function Homepage() {
             />
           </>
         );
-      default:
-        return <TextPost>Select a community to view content</TextPost>;
+      case "Exercise":
+        return (
+          <>
+            <ImagePost
+              imageURL="post-images/dog-03.jpg"
+              userImageURL="profile-pictures/dog-profile-03.jpg"
+              username="TerrierJoe33"
+              description="Ancient partnership forged through millennia of"
+              onCommentClick={() => setShowOverlay(true)}
+            />
+          </>
+        );
     }
   };
 
