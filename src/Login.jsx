@@ -16,10 +16,10 @@ export default function Login() {
         <div className="flex flex-col align-center gap-44 flex-1">
           <p className="color-black text-large weight-700">Verse</p>
 
-          <div className="flex flex-row justify-around bg-black full-width p-4 border-radius">
+          <div className="flex flex-row justify-around bg-black full-width p-8 rounded-xl">
             <div
-              className={`flex-1 p-2 cursor-pointer transition-all ${
-                isLogin ? "bg-white rounded-left" : "bg-black"
+              className={`flex-1 p-2 cursor-pointer ${
+                isLogin ? "bg-white rounded-lg" : "bg-black"
               }`}
               onClick={() => setIsLogin(true)}
             >
@@ -33,8 +33,8 @@ export default function Login() {
             </div>
 
             <div
-              className={`flex-1 p-2 cursor-pointer transition-all ${
-                !isLogin ? "bg-white rounded-right" : "bg-black"
+              className={`flex-1 p-2 cursor-pointer ${
+                !isLogin ? "bg-white rounded-lg" : "bg-black"
               }`}
               onClick={() => setIsLogin(false)}
             >
@@ -53,7 +53,7 @@ export default function Login() {
               Email address
             </label>
             <input
-              className="text-input"
+              className="login-text-input"
               type="text"
               id="email"
               name="email"
@@ -67,7 +67,7 @@ export default function Login() {
                 Password
               </label>
               <input
-                className="text-input"
+                className="login-text-input"
                 type="password"
                 id="password"
                 name="password"
@@ -91,7 +91,7 @@ export default function Login() {
                 Confirm Password
               </label>
               <input
-                className="text-input"
+                className="login-text-input"
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"

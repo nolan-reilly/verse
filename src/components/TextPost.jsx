@@ -27,7 +27,7 @@ export default function TextPost({
         </div>
       </div>
 
-      <div className="bg-dark-gray flex flex-col gap-16">
+      <div className="flex flex-col gap-16">
         <div className="flex flex-row justify-between align-center">
           <div className="flex flex-row gap-24">
             <img

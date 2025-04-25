@@ -117,7 +117,7 @@ export default function CommentsOverlay({ isOpen, onClose }) {
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Write a reply..."
-                className="flex-1 p-8 rounded bg-dark-gray"
+                className="flex-1 p-8 rounded"
               />
               <button type="submit" className="comment-post-btn-small">
                 Post
