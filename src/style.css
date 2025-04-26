@@ -22,7 +22,6 @@ body {
 }
 
 /* Styles related to inbox and search pages */
-/* For InboxUser component */
 .rounded-box {
   border-radius: 12px;
   padding: 16px;
@@ -56,13 +55,6 @@ body {
   color: var(--white);
   text-align: center;
   align-items: center;
-}
-
-.active-button {
-  background-color: var(--primary-color); /* Highlight active button */
-  color: white; /* Change text color */
-  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3); /* Indented effect */
-  transform: translateY(2px); /* Slightly "pressed" appearance */
 }
 
 /* Typography */
@@ -314,6 +306,9 @@ body {
 /* Spacing - Margins */
 .mt-auto {
   margin-top: auto;
+}
+.mt-8 {
+  margin-top: 8px;
 }
 
 .mt-28 {
@@ -576,6 +571,33 @@ input {
   border-radius: 4px;
   font-weight: bold;
   font-size: 16px;
+}
+
+.search-filter-btn {
+  background-color: var(--black);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid white;
+}
+
+.active-button {
+  background-color: var(--white);
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.community-join-btn {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 8px 24px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
 }
 
 /* Icons and Images */
