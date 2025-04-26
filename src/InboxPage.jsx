@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import InboxUser from "./components/InboxUser.jsx";
+import BottomNavigation from "./components/BottomNavigation.jsx";
 
 export default function InboxPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Message data array
   const messages = [
     {
       username: "Ricardo",

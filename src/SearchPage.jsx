@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import SearchCommunity from "./components/SearchCommunity.jsx";
 import SearchUser from "./components/SearchUser.jsx";
+import BottomNavigation from "./components/BottomNavigation.jsx";
 
 export default function SearchPage() {
   const [showCommunities, setShowCommunities] = useState(true);
@@ -151,6 +152,8 @@ export default function SearchPage() {
           </ul>
         </div>
       </div>
+
+      <BottomNavigation />
     </div>
   );
 }
