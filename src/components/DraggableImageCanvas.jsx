@@ -1,6 +1,14 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
-export default function DraggableImageCanvas({ images, setImages }) {
+export default function DraggableImageCanvas({
+  images,
+  setImages,
+  canDrag = true,
+}) {
+  /* -----------------------------
+   *  Local state & refs
+   * ----------------------------*/
   const [draggedItem, setDraggedItem] = useState(null);
   const [containerRect, setContainerRect] = useState({
     left: 0,
@@ -16,18 +24,13 @@ export default function DraggableImageCanvas({ images, setImages }) {
   const overflowPercent = 25; // % of each image allowed to overflow
   const [edgeProximity, setEdgeProximity] = useState({});
 
-  const calculateEdgeProximity = (
-    imgs,
-    containerWidth,
-    containerHeight,
-    sizes
-  ) => {
+  const calculateEdgeProximity = (imgs, cW, cH, sizes) => {
     const prox = {};
     const threshold = 50; // px
     imgs.forEach((img) => {
       const s = sizes[img.id] || { width: 100, height: 100 };
-      const right = containerWidth - (img.x + s.width);
-      const bottom = containerHeight - (img.y + s.height);
+      const right = cW - (img.x + s.width);
+      const bottom = cH - (img.y + s.height);
       prox[img.id] = {
         right: right <= threshold,
         bottom: bottom <= threshold,
@@ -42,10 +45,10 @@ export default function DraggableImageCanvas({ images, setImages }) {
     if (!containerRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
-    const cWidth = rect.width;
-    const cHeight = rect.height;
+    const cW = rect.width;
+    const cH = rect.height;
 
-    // measure rendered images
+    // measure rendered images (scale applied)
     const sizes = {};
     images.forEach((img) => {
       const el = imageRefs.current[img.id];
@@ -60,6 +63,7 @@ export default function DraggableImageCanvas({ images, setImages }) {
       }
     });
 
+    // edge proximity before layout fixes
     const prox = calculateEdgeProximity(
       images,
       prevContainerSize.current.width,
@@ -68,12 +72,7 @@ export default function DraggableImageCanvas({ images, setImages }) {
     );
     setEdgeProximity(prox);
 
-    setContainerRect({
-      left: rect.left,
-      top: rect.top,
-      width: cWidth,
-      height: cHeight,
-    });
+    setContainerRect({ left: rect.left, top: rect.top, width: cW, height: cH });
     setImageSizes(sizes);
 
     // adjust for resize
@@ -81,15 +80,15 @@ export default function DraggableImageCanvas({ images, setImages }) {
       adjustImagesOnResize(
         prevContainerSize.current.width,
         prevContainerSize.current.height,
-        cWidth,
-        cHeight,
+        cW,
+        cH,
         sizes,
         prox
       );
     }
 
-    ensureImagesInBounds(cWidth, cHeight, sizes);
-    prevContainerSize.current = { width: cWidth, height: cHeight };
+    ensureImagesInBounds(cW, cH, sizes);
+    prevContainerSize.current = { width: cW, height: cH };
   };
 
   const adjustImagesOnResize = (oldW, oldH, newW, newH, sizes, prox) => {
@@ -122,14 +121,12 @@ export default function DraggableImageCanvas({ images, setImages }) {
 
   useEffect(() => {
     const init = setTimeout(updateMeasurements, 200);
-
     let timer;
     const onResize = () => {
       clearTimeout(timer);
       timer = setTimeout(updateMeasurements, 100);
     };
     window.addEventListener("resize", onResize);
-
     return () => {
       clearTimeout(init);
       clearTimeout(timer);
@@ -138,13 +135,14 @@ export default function DraggableImageCanvas({ images, setImages }) {
   }, [images.length]);
 
   useEffect(() => {
-    const onImgLoad = () => setTimeout(updateMeasurements, 50);
-    const imgs = document.querySelectorAll(".draggable-image");
-    imgs.forEach((i) => i.addEventListener("load", onImgLoad));
-    return () => imgs.forEach((i) => i.removeEventListener("load", onImgLoad));
+    const onLoad = () => setTimeout(updateMeasurements, 50);
+    const list = document.querySelectorAll(".draggable-image");
+    list.forEach((i) => i.addEventListener("load", onLoad));
+    return () => list.forEach((i) => i.removeEventListener("load", onLoad));
   }, [images]);
 
-  const handleDragStart = (clientX, clientY, id) => {
+  const startDrag = (clientX, clientY, id) => {
+    if (!canDrag) return;
     const item = images.find((img) => img.id === id);
     const maxZ = Math.max(...images.map((img) => img.zIndex));
     setImages((prev) =>
@@ -158,16 +156,18 @@ export default function DraggableImageCanvas({ images, setImages }) {
   };
 
   const handleMouseDown = (e, id) => {
+    if (!canDrag) return;
     e.preventDefault();
-    handleDragStart(e.clientX, e.clientY, id);
+    startDrag(e.clientX, e.clientY, id);
   };
   const handleTouchStart = (e, id) => {
+    if (!canDrag) return;
     const t = e.touches[0];
-    handleDragStart(t.clientX, t.clientY, id);
+    startDrag(t.clientX, t.clientY, id);
   };
 
   const moveItem = (clientX, clientY) => {
-    if (!draggedItem) return;
+    if (!canDrag || !draggedItem) return;
     const s = imageSizes[draggedItem.id] || { width: 100, height: 100 };
     const maxOX = s.width * (overflowPercent / 100);
     const maxOY = s.height * (overflowPercent / 100);
@@ -182,11 +182,12 @@ export default function DraggableImageCanvas({ images, setImages }) {
 
   const onMouseMove = (e) => moveItem(e.clientX, e.clientY);
   const onTouchMove = (e) => {
-    e.preventDefault();
+    if (!canDrag) return;
     moveItem(e.touches[0].clientX, e.touches[0].clientY);
   };
 
   const endDrag = () => {
+    if (!canDrag) return;
     if (draggedItem) {
       const prox = calculateEdgeProximity(
         images,
@@ -213,6 +214,7 @@ export default function DraggableImageCanvas({ images, setImages }) {
       onTouchMove={onTouchMove}
       onTouchEnd={endDrag}
       onTouchCancel={endDrag}
+      style={{ cursor: canDrag ? "grab" : "default" }}
     >
       {images.map((img) => (
         <div
@@ -220,9 +222,16 @@ export default function DraggableImageCanvas({ images, setImages }) {
           className={`draggable-image-item ${
             draggedItem?.id === img.id ? "active" : ""
           }`}
-          style={{ left: `${img.x}px`, top: `${img.y}px`, zIndex: img.zIndex }}
-          onMouseDown={(e) => handleMouseDown(e, img.id)}
-          onTouchStart={(e) => handleTouchStart(e, img.id)}
+          style={{
+            left: `${img.x}px`,
+            top: `${img.y}px`,
+            zIndex: img.zIndex,
+            cursor: canDrag ? "grab" : "default",
+          }}
+          onMouseDown={canDrag ? (e) => handleMouseDown(e, img.id) : undefined}
+          onTouchStart={
+            canDrag ? (e) => handleTouchStart(e, img.id) : undefined
+          }
         >
           <img
             ref={(el) => saveImageRef(img.id, el)}

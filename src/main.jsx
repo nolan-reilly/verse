@@ -8,6 +8,7 @@ import InboxPage from "./InboxPage.jsx";
 import MessagingPage from "./MessagingPage.jsx";
 import ProfilePage from "./ProfilePage.jsx";
 import SearchPage from "./SearchPage.jsx";
+import VisitProfilePage from "./VisitProfilePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "search",
     element: <SearchPage />,
+  },
+  {
+    path: "visiting",
+    element: <VisitProfilePage />,
   },
 ]);
 

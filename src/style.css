@@ -192,6 +192,10 @@ body {
   text-decoration: none;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 /* Layout - Container and Positioning */
 .container {
   width: 85%;
@@ -253,12 +257,20 @@ body {
   flex: 1;
 }
 
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
 .align-center {
   align-items: center;
 }
 
 .align-flex-end {
   align-items: flex-end;
+}
+
+.align-flex-start {
+  align-items: start;
 }
 
 .justify-between {
@@ -279,6 +291,10 @@ body {
 
 .self-start {
   align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 /* Spacing - Gaps */
@@ -391,6 +407,10 @@ body {
 
 .mt-28 {
   margin-top: 28px;
+}
+
+.mb-48 {
+  margin-bottom: 96px;
 }
 
 .my-16 {
@@ -702,7 +722,7 @@ input {
   background-color: var(--white);
   border: none;
   color: black;
-  padding: 6px 12px;
+  padding: 7px 12px;
   font-size: 15px;
   border-radius: 6px;
   font-weight: bold;
@@ -799,6 +819,18 @@ input {
 
 .comment-icon {
   cursor: pointer;
+}
+
+.profile-page-image {
+  max-width: 50%;
+  flex-shrink: 0;
+}
+
+.profile-page-image-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Navigation Components */

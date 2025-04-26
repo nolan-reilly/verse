@@ -1,7 +1,8 @@
-export default function ProfileTextPost() {
+export default function ProfileTextPost({ title, content }) {
   return (
     <div>
-      <p>Profile Text Post</p>
+      <p className="font-bold text-large">{title}</p>
+      <p>{content}</p>
     </div>
   );
 }
