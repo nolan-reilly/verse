@@ -6,7 +6,6 @@ import BottomNavigation from "./components/BottomNavigation";
 import CommentsOverlay from "./components/CommentsOverlay";
 
 export default function Homepage() {
-  // Initialize with Following as permanent community (without image)
   const [selectedCommunities, setSelectedCommunities] = useState([
     {
       name: "Computer Science",

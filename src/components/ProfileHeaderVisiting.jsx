@@ -10,6 +10,8 @@ export default function ProfileHeader({
 }) {
   const storageKey = `profileHeaderImages:${username}`;
 
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const defaultImages = [
     {
       id: 1,
@@ -100,7 +102,11 @@ export default function ProfileHeader({
       <p className="text-small">{description}</p>
 
       <div className="flex flex-row align-center gap-16">
-        <img className="svg-white width-18" src="play.svg" alt="" />
+        <img
+          className="svg-white width-18"
+          src={isPlaying ? "pause.svg" : "play.svg"}
+          onClick={() => setIsPlaying((p) => !p)}
+        />
         <div className="profile-page-play-timeline"></div>
         <p className="text-extra-small font-bold">0:00/4:12</p>
       </div>

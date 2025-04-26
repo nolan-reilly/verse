@@ -10,44 +10,46 @@ export default function ProfileHeader({
 }) {
   const storageKey = `profileHeaderImages:${username}`;
 
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const defaultImages = [
     {
       id: 1,
       url: "drag-images/drag-01.png",
-      x: 50,
-      y: 50,
-      zIndex: 1,
+      x: 110,
+      y: 171,
+      zIndex: 4,
       scale: 3,
     },
     {
       id: 2,
       url: "drag-images/drag-02.png",
-      x: 150,
-      y: 100,
-      zIndex: 1,
+      x: -60,
+      y: 136,
+      zIndex: 2,
       scale: 3,
     },
     {
       id: 3,
       url: "drag-images/drag-03.png",
-      x: 250,
-      y: 30,
+      x: -37,
+      y: -80,
       zIndex: 1,
       scale: 4,
     },
     {
       id: 4,
       url: "drag-images/drag-04.png",
-      x: 250,
-      y: 30,
+      x: 150,
+      y: 99,
       zIndex: 1,
       scale: 3,
     },
     {
       id: 5,
       url: "drag-images/drag-05.png",
-      x: 250,
-      y: 30,
+      x: 215,
+      y: 6.7,
       zIndex: 1,
       scale: 2,
     },
@@ -108,7 +110,11 @@ export default function ProfileHeader({
       <p className="text-small">{description}</p>
 
       <div className="flex flex-row align-center gap-16">
-        <img className="svg-white width-18" src="play.svg" alt="" />
+        <img
+          className="svg-white width-18"
+          src={isPlaying ? "pause.svg" : "play.svg"}
+          onClick={() => setIsPlaying((p) => !p)}
+        />
         <div className="profile-page-play-timeline"></div>
         <p className="text-extra-small font-bold">0:00/4:12</p>
       </div>
@@ -121,9 +127,11 @@ export default function ProfileHeader({
         />
 
         {canDrag && (
-          <button onClick={saveLayout} className="draggable-save-btn">
-            Save Layout
-          </button>
+          <div>
+            <button onClick={saveLayout} className="draggable-save-btn">
+              Save Layout
+            </button>
+          </div>
         )}
       </div>
 

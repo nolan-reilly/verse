@@ -68,7 +68,7 @@ export default function MessagingPage() {
               src="profile-pictures/messenger-profile-picture.jpg"
               alt="Profile"
             />
-            <p className="text-small weight-700">User</p>
+            <p className="text-small weight-700">Player</p>
           </div>
 
           {/* Empty div to maintain the flex layout */}
