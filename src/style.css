@@ -930,6 +930,8 @@ body.sidebar-open {
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment-overlay input,
@@ -960,11 +962,34 @@ body.sidebar-open {
 .overlay-comments {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-bottom: 16px;
 }
 
 .comment {
   border-left: 2px solid rgba(255, 255, 255, 0.1);
   padding-left: 16px;
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.comment p {
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.replies {
+  width: 100%;
+  max-width: 100%;
 }
 
 .comment:last-child {
