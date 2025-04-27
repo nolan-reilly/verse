@@ -11,7 +11,7 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      <div className="container login-card py-24 lg-px-64 flex flex-col gap-16">
+      <div className="container login-card py-24 flex flex-col gap-16">
         {/* Logo */}
         <div className="flex flex-row justify-end">
           <img className="width-48" src="./star.svg" alt="Star" />
