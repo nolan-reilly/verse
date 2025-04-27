@@ -76,3 +76,28 @@ _The app should now display in a mobile-sized viewport. Refresh if layout appear
 
 If you're having trouble with local setup, a hosted version is available:  
 [https://nolan-reilly.github.io/verse](https://nolan-reilly.github.io/verse)
+
+# AI Usage Statement
+
+## Development Assistance
+### Draggable Canvas Component
+AI was used for the development of the Draggable Canvas Component for the Profile page due to its complexity:
+
+![Draggable Canvas Architecture](https://github.com/user-attachments/assets/1dd25dc2-486b-4cde-8175-be4583a963da)
+
+![Drag Boundary Logic](https://github.com/user-attachments/assets/79d7b6d9-a55b-4965-8987-ad5300b51e85)
+
+![State Management](https://github.com/user-attachments/assets/2bf57ac0-2ecd-4592-b7e0-97c65beabaf7)
+
+![Final Implementation](https://github.com/user-attachments/assets/d2e6c78e-fe74-4b6f-b1fe-ede01c9b057b)
+
+### CSS Optimization
+AI was also used to help reorganize the `style.css` file to improve its readability and duplicate styles:
+
+![CSS Refactoring](https://github.com/user-attachments/assets/2412acb1-2721-4824-a79d-1e48273c9d95)
+
+
+
+
+
+
