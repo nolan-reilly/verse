@@ -1,114 +1,154 @@
 import { useState, useEffect, useRef } from "react";
 
-/** Drag-and-drop header.  If `canDrag` is false:
- *  - images are locked in place
- *  - area allows normal page scrolling on mobile
- */
 export default function DraggableImageCanvas({
   images,
   setImages,
   canDrag = true,
 }) {
-  /* ---------- state & refs ---------- */
-  const [dragged, setDragged] = useState(null); // {id, offsetX, offsetY}
-  const [sizes, setSizes] = useState({}); // { id: {w,h} }
-  const container = useRef(null);
-  const refs = useRef({}); // image nodes
+  const [draggedItem, setDraggedItem] = useState(null); // renamed back
+  const [sizes, setSizes] = useState({});
+  const containerRef = useRef(null);
+  const prevSize = useRef({ w: 0, h: 0 });
+  const imgRefs = useRef({});
 
-  const allowOverflow = 0.25; // 25 %
+  const OVERFLOW = 0.25;
+  const SNAP = 50;
 
   /* ---------- helpers ---------- */
-  const saveRef = (id, el) => el && (refs.current[id] = el);
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const saveRef = (id, el) => el && (imgRefs.current[id] = el);
 
-  const within = (val, min, max) => Math.max(min, Math.min(max, val));
+  const measure = () => {
+    if (!containerRef.current) return;
+    const box = containerRef.current.getBoundingClientRect();
 
-  const calcSizes = () => {
-    const s = {};
-    images.forEach((img) => {
-      const r = refs.current[img.id]?.getBoundingClientRect();
-      s[img.id] = r ? { w: r.width, h: r.height } : { w: 100, h: 100 };
+    /* measure images (after scale) */
+    const sz = {};
+    images.forEach((i) => {
+      const r = imgRefs.current[i.id]?.getBoundingClientRect();
+      sz[i.id] = r ? { w: r.width, h: r.height } : { w: 100, h: 100 };
     });
-    setSizes(s);
+    setSizes(sz);
+
+    /* snap right / bottom aligned on resize */
+    if (prevSize.current.w) {
+      setImages((prev) =>
+        prev.map((i) => {
+          const { w, h } = sz[i.id];
+          const right = prevSize.current.w - (i.x + w);
+          const bottom = prevSize.current.h - (i.y + h);
+          let x = i.x,
+            y = i.y;
+          if (right <= SNAP) x = box.width - w - right;
+          if (bottom <= SNAP) y = box.height - h - bottom;
+          return x === i.x && y === i.y ? i : { ...i, x, y };
+        })
+      );
+    }
+
+    /* keep within overflow limits */
+    setImages((prev) =>
+      prev.map((i) => {
+        const { w, h } = sz[i.id];
+        const maxOX = w * OVERFLOW;
+        const maxOY = h * OVERFLOW;
+        const x = clamp(i.x, -maxOX, box.width - w + maxOX);
+        const y = clamp(i.y, -maxOY, box.height - h + maxOY);
+        return x === i.x && y === i.y ? i : { ...i, x, y };
+      })
+    );
+
+    prevSize.current = { w: box.width, h: box.height };
   };
 
-  /* ---------- resize / load listeners ---------- */
+  /* run measure after mount, resize, img load */
   useEffect(() => {
-    calcSizes();
-    const onResize = () => requestAnimationFrame(calcSizes);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const t = setTimeout(measure, 200);
+    const onR = () => requestAnimationFrame(measure);
+    window.addEventListener("resize", onR);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", onR);
+    };
   }, [images.length]);
 
   useEffect(() => {
     const imgs = document.querySelectorAll(".draggable-image");
-    const loaded = () => requestAnimationFrame(calcSizes);
-    imgs.forEach((i) => i.addEventListener("load", loaded));
-    return () => imgs.forEach((i) => i.removeEventListener("load", loaded));
+    const ld = () => requestAnimationFrame(measure);
+    imgs.forEach((i) => i.addEventListener("load", ld));
+    return () => imgs.forEach((i) => i.removeEventListener("load", ld));
   }, [images]);
 
-  /* ---------- dragging ---------- */
-  const start = (clientX, clientY, id) => {
-    const box = container.current.getBoundingClientRect();
+  /* ---------- drag logic ---------- */
+  const begin = (cx, cy, id) => {
+    if (!canDrag) return;
+    const box = containerRef.current.getBoundingClientRect();
     const target = images.find((i) => i.id === id);
-    setDragged({
+
+    /* bring to front */
+    const maxZ = Math.max(...images.map((i) => i.zIndex));
+    setImages((p) =>
+      p.map((i) => (i.id === id ? { ...i, zIndex: maxZ + 1 } : i))
+    );
+
+    setDraggedItem({
       id,
-      offsetX: clientX - box.left - target.x,
-      offsetY: clientY - box.top - target.y,
+      offsetX: cx - box.left - target.x,
+      offsetY: cy - box.top - target.y,
     });
   };
 
-  const move = (clientX, clientY) => {
-    if (!dragged) return;
-    const cBox = container.current.getBoundingClientRect();
-    const { w, h } = sizes[dragged.id] || { w: 100, h: 100 };
-    const maxOX = w * allowOverflow;
-    const maxOY = h * allowOverflow;
+  const move = (cx, cy) => {
+    if (!draggedItem) return;
+    const box = containerRef.current.getBoundingClientRect();
+    const { w, h } = sizes[draggedItem.id] || { w: 100, h: 100 };
+    const maxOX = w * OVERFLOW;
+    const maxOY = h * OVERFLOW;
 
-    const x = within(
-      clientX - cBox.left - dragged.offsetX,
+    const x = clamp(
+      cx - box.left - draggedItem.offsetX,
       -maxOX,
-      cBox.width - w + maxOX
+      box.width - w + maxOX
     );
-    const y = within(
-      clientY - cBox.top - dragged.offsetY,
+    const y = clamp(
+      cy - box.top - draggedItem.offsetY,
       -maxOY,
-      cBox.height - h + maxOY
+      box.height - h + maxOY
     );
 
-    setImages((prev) =>
-      prev.map((img) => (img.id === dragged.id ? { ...img, x, y } : img))
+    setImages((p) =>
+      p.map((i) => (i.id === draggedItem.id ? { ...i, x, y } : i))
     );
   };
 
-  const stop = () => setDragged(null);
+  const stop = () => setDraggedItem(null);
 
-  /* ---------- props depending on canDrag ---------- */
-  const divProps = {
-    ref: container,
+  /* ---------- container props ---------- */
+  const props = {
+    ref: containerRef,
     className: "drag-container",
     style: {
       cursor: canDrag ? "grab" : "auto",
-      touchAction: canDrag ? "none" : "auto", // lets page scroll when locked
+      touchAction: canDrag ? "none" : "auto",
     },
   };
-
   if (canDrag) {
-    divProps.onMouseMove = (e) => move(e.clientX, e.clientY);
-    divProps.onMouseUp = stop;
-    divProps.onMouseLeave = stop;
-    divProps.onTouchMove = (e) =>
-      move(e.touches[0].clientX, e.touches[0].clientY);
-    divProps.onTouchEnd = stop;
-    divProps.onTouchCancel = stop;
+    props.onMouseMove = (e) => move(e.clientX, e.clientY);
+    props.onMouseUp = stop;
+    props.onMouseLeave = stop;
+    props.onTouchMove = (e) => move(e.touches[0].clientX, e.touches[0].clientY);
+    props.onTouchEnd = stop;
+    props.onTouchCancel = stop;
   }
 
-  /* ---------- render ---------- */
   return (
-    <div {...divProps}>
+    <div {...props}>
       {images.map((img) => (
         <div
           key={img.id}
-          className="draggable-image-item"
+          className={`draggable-image-item ${
+            draggedItem?.id === img.id ? "active" : ""
+          }`}
           style={{
             left: img.x,
             top: img.y,
@@ -116,11 +156,11 @@ export default function DraggableImageCanvas({
             pointerEvents: canDrag ? "auto" : "none",
           }}
           onMouseDown={
-            canDrag ? (e) => start(e.clientX, e.clientY, img.id) : null
+            canDrag ? (e) => begin(e.clientX, e.clientY, img.id) : null
           }
           onTouchStart={
             canDrag
-              ? (e) => start(e.touches[0].clientX, e.touches[0].clientY, img.id)
+              ? (e) => begin(e.touches[0].clientX, e.touches[0].clientY, img.id)
               : null
           }
         >
@@ -132,6 +172,7 @@ export default function DraggableImageCanvas({
             style={{
               transform: `scale(${img.scale ?? 1})`,
               transformOrigin: "top left",
+              userSelect: "none",
             }}
             draggable="false"
           />
