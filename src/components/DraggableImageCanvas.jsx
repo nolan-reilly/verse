@@ -5,7 +5,7 @@ export default function DraggableImageCanvas({
   setImages,
   canDrag = true,
 }) {
-  const [draggedItem, setDraggedItem] = useState(null); // renamed back
+  const [draggedItem, setDraggedItem] = useState(null);
   const [sizes, setSizes] = useState({});
   const containerRef = useRef(null);
   const prevSize = useRef({ w: 0, h: 0 });
@@ -14,7 +14,6 @@ export default function DraggableImageCanvas({
   const OVERFLOW = 0.25;
   const SNAP = 50;
 
-  /* ---------- helpers ---------- */
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const saveRef = (id, el) => el && (imgRefs.current[id] = el);
 
@@ -22,7 +21,6 @@ export default function DraggableImageCanvas({
     if (!containerRef.current) return;
     const box = containerRef.current.getBoundingClientRect();
 
-    /* measure images (after scale) */
     const sz = {};
     images.forEach((i) => {
       const r = imgRefs.current[i.id]?.getBoundingClientRect();
@@ -30,7 +28,6 @@ export default function DraggableImageCanvas({
     });
     setSizes(sz);
 
-    /* snap right / bottom aligned on resize */
     if (prevSize.current.w) {
       setImages((prev) =>
         prev.map((i) => {
@@ -46,7 +43,6 @@ export default function DraggableImageCanvas({
       );
     }
 
-    /* keep within overflow limits */
     setImages((prev) =>
       prev.map((i) => {
         const { w, h } = sz[i.id];
@@ -61,7 +57,6 @@ export default function DraggableImageCanvas({
     prevSize.current = { w: box.width, h: box.height };
   };
 
-  /* run measure after mount, resize, img load */
   useEffect(() => {
     const t = setTimeout(measure, 200);
     const onR = () => requestAnimationFrame(measure);
@@ -79,13 +74,11 @@ export default function DraggableImageCanvas({
     return () => imgs.forEach((i) => i.removeEventListener("load", ld));
   }, [images]);
 
-  /* ---------- drag logic ---------- */
   const begin = (cx, cy, id) => {
     if (!canDrag) return;
     const box = containerRef.current.getBoundingClientRect();
     const target = images.find((i) => i.id === id);
 
-    /* bring to front */
     const maxZ = Math.max(...images.map((i) => i.zIndex));
     setImages((p) =>
       p.map((i) => (i.id === id ? { ...i, zIndex: maxZ + 1 } : i))
@@ -123,7 +116,6 @@ export default function DraggableImageCanvas({
 
   const stop = () => setDraggedItem(null);
 
-  /* ---------- container props ---------- */
   const props = {
     ref: containerRef,
     className: "drag-container",
