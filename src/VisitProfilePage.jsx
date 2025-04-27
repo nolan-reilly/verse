@@ -13,7 +13,6 @@ export default function ProfilePage() {
         canDrag={false}
       />
 
-      {/* content */}
       <div className="flex flex-col gap-44">
         <ProfileImagePost
           imageURL="post-images/lebron.jpg"

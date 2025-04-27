@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function TextPost({
   userImageURL,
@@ -29,18 +30,23 @@ export default function TextPost({
 
       <div className="flex flex-col gap-16">
         <div className="flex flex-row justify-between align-center">
-          <div className="flex flex-row gap-24">
-            <img
-              className="width-28 svg-white"
-              src="./comment-filled.svg"
-              alt="Message"
-              onClick={onCommentClick}
-            />
-            <img
-              className="width-24 svg-white"
-              src="./message.svg"
-              alt="Message"
-            />
+          <div className="flex flex-row align-center gap-24">
+            <div>
+              <img
+                className="width-28 svg-white"
+                src="./comment-filled.svg"
+                alt="Message"
+                onClick={onCommentClick}
+              />
+            </div>
+
+            <Link to="/messaging">
+              <img
+                className="width-24 svg-white"
+                src="./message.svg"
+                alt="Message"
+              />
+            </Link>
           </div>
 
           <div>
