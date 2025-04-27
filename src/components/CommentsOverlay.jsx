@@ -190,20 +190,22 @@ export default function CommentsOverlay({ isOpen, onClose }) {
           onSubmit={addComment}
           className="mt-auto p-16 flex flex-col gap-8"
         >
-          <input
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add a comment..."
-            className="comment-input p-8 rounded break-words"
-            inputMode="text"
-            spellCheck="false"
-            autoComplete="off"
-            autoCorrect="off"
-          />
-          <button type="submit" className="comment-post-btn">
-            Post
-          </button>
+          <div className="flex flex-row gap-4">
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment..."
+              className="comment-input full-width p-8 rounded break-words"
+              inputMode="text"
+              spellCheck="false"
+              autoComplete="off"
+              autoCorrect="off"
+            />
+            <button type="submit" className="comment-post-btn">
+              Post
+            </button>
+          </div>
         </form>
       </div>
     </div>
