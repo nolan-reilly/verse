@@ -5,7 +5,7 @@ import ProfileTextPost from "./components/ProfileTextPost";
 
 export default function ProfilePage() {
   return (
-    <div className="container flex flex-col gap-32 py-16 mb-48">
+    <div className="container flex flex-col gap-32 py-16 mb-76">
       <ProfileHeader
         profileURL="profile-pictures/user-profile-picture.jpg"
         username="User"

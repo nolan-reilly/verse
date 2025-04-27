@@ -101,7 +101,7 @@ export default function SearchPage() {
         </nav>
       </div>
 
-      <div className="large-container flex flex-col gap-8">
+      <div className="large-container flex flex-col gap-8 mb-76">
         <input
           className="inbox-text-input full-width"
           placeholder="Search"

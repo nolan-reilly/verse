@@ -1,245 +1,136 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
+/** Drag-and-drop header.  If `canDrag` is false:
+ *  - images are locked in place
+ *  - area allows normal page scrolling on mobile
+ */
 export default function DraggableImageCanvas({
   images,
   setImages,
   canDrag = true,
 }) {
-  /* -----------------------------
-   *  Local state & refs
-   * ----------------------------*/
-  const [draggedItem, setDraggedItem] = useState(null);
-  const [containerRect, setContainerRect] = useState({
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0,
-  });
-  const [imageSizes, setImageSizes] = useState({});
-  const containerRef = useRef(null);
-  const prevContainerSize = useRef({ width: 0, height: 0 });
-  const imageRefs = useRef({});
+  /* ---------- state & refs ---------- */
+  const [dragged, setDragged] = useState(null); // {id, offsetX, offsetY}
+  const [sizes, setSizes] = useState({}); // { id: {w,h} }
+  const container = useRef(null);
+  const refs = useRef({}); // image nodes
 
-  const overflowPercent = 25; // % of each image allowed to overflow
-  const [edgeProximity, setEdgeProximity] = useState({});
+  const allowOverflow = 0.25; // 25 %
 
-  const calculateEdgeProximity = (imgs, cW, cH, sizes) => {
-    const prox = {};
-    const threshold = 50; // px
-    imgs.forEach((img) => {
-      const s = sizes[img.id] || { width: 100, height: 100 };
-      const right = cW - (img.x + s.width);
-      const bottom = cH - (img.y + s.height);
-      prox[img.id] = {
-        right: right <= threshold,
-        bottom: bottom <= threshold,
-        rightDistance: right,
-        bottomDistance: bottom,
-      };
-    });
-    return prox;
-  };
+  /* ---------- helpers ---------- */
+  const saveRef = (id, el) => el && (refs.current[id] = el);
 
-  const updateMeasurements = () => {
-    if (!containerRef.current) return;
+  const within = (val, min, max) => Math.max(min, Math.min(max, val));
 
-    const rect = containerRef.current.getBoundingClientRect();
-    const cW = rect.width;
-    const cH = rect.height;
-
-    // measure rendered images (scale applied)
-    const sizes = {};
+  const calcSizes = () => {
+    const s = {};
     images.forEach((img) => {
-      const el = imageRefs.current[img.id];
-      if (el) {
-        const r = el.getBoundingClientRect();
-        sizes[img.id] = { width: r.width, height: r.height };
-      } else {
-        sizes[img.id] = {
-          width: 100 * (img.scale || 1),
-          height: 100 * (img.scale || 1),
-        };
-      }
+      const r = refs.current[img.id]?.getBoundingClientRect();
+      s[img.id] = r ? { w: r.width, h: r.height } : { w: 100, h: 100 };
     });
-
-    // edge proximity before layout fixes
-    const prox = calculateEdgeProximity(
-      images,
-      prevContainerSize.current.width,
-      prevContainerSize.current.height,
-      sizes
-    );
-    setEdgeProximity(prox);
-
-    setContainerRect({ left: rect.left, top: rect.top, width: cW, height: cH });
-    setImageSizes(sizes);
-
-    // adjust for resize
-    if (prevContainerSize.current.width) {
-      adjustImagesOnResize(
-        prevContainerSize.current.width,
-        prevContainerSize.current.height,
-        cW,
-        cH,
-        sizes,
-        prox
-      );
-    }
-
-    ensureImagesInBounds(cW, cH, sizes);
-    prevContainerSize.current = { width: cW, height: cH };
+    setSizes(s);
   };
 
-  const adjustImagesOnResize = (oldW, oldH, newW, newH, sizes, prox) => {
-    setImages((prev) =>
-      prev.map((img) => {
-        const s = sizes[img.id];
-        let x = img.x;
-        let y = img.y;
-        if (prox[img.id]?.right)
-          x = newW - s.width - prox[img.id].rightDistance;
-        if (prox[img.id]?.bottom)
-          y = newH - s.height - prox[img.id].bottomDistance;
-        return { ...img, x, y };
-      })
-    );
-  };
-
-  const ensureImagesInBounds = (cW, cH, sizes) => {
-    setImages((prev) =>
-      prev.map((img) => {
-        const s = sizes[img.id] || { width: 100, height: 100 };
-        const maxOX = s.width * (overflowPercent / 100);
-        const maxOY = s.height * (overflowPercent / 100);
-        const x = Math.max(-maxOX, Math.min(cW - s.width + maxOX, img.x));
-        const y = Math.max(-maxOY, Math.min(cH - s.height + maxOY, img.y));
-        return x === img.x && y === img.y ? img : { ...img, x, y };
-      })
-    );
-  };
-
+  /* ---------- resize / load listeners ---------- */
   useEffect(() => {
-    const init = setTimeout(updateMeasurements, 200);
-    let timer;
-    const onResize = () => {
-      clearTimeout(timer);
-      timer = setTimeout(updateMeasurements, 100);
-    };
+    calcSizes();
+    const onResize = () => requestAnimationFrame(calcSizes);
     window.addEventListener("resize", onResize);
-    return () => {
-      clearTimeout(init);
-      clearTimeout(timer);
-      window.removeEventListener("resize", onResize);
-    };
+    return () => window.removeEventListener("resize", onResize);
   }, [images.length]);
 
   useEffect(() => {
-    const onLoad = () => setTimeout(updateMeasurements, 50);
-    const list = document.querySelectorAll(".draggable-image");
-    list.forEach((i) => i.addEventListener("load", onLoad));
-    return () => list.forEach((i) => i.removeEventListener("load", onLoad));
+    const imgs = document.querySelectorAll(".draggable-image");
+    const loaded = () => requestAnimationFrame(calcSizes);
+    imgs.forEach((i) => i.addEventListener("load", loaded));
+    return () => imgs.forEach((i) => i.removeEventListener("load", loaded));
   }, [images]);
 
-  const startDrag = (clientX, clientY, id) => {
-    if (!canDrag) return;
-    const item = images.find((img) => img.id === id);
-    const maxZ = Math.max(...images.map((img) => img.zIndex));
-    setImages((prev) =>
-      prev.map((img) => (img.id === id ? { ...img, zIndex: maxZ + 1 } : img))
-    );
-    setDraggedItem({
+  /* ---------- dragging ---------- */
+  const start = (clientX, clientY, id) => {
+    const box = container.current.getBoundingClientRect();
+    const target = images.find((i) => i.id === id);
+    setDragged({
       id,
-      offsetX: clientX - containerRect.left - item.x,
-      offsetY: clientY - containerRect.top - item.y,
+      offsetX: clientX - box.left - target.x,
+      offsetY: clientY - box.top - target.y,
     });
   };
 
-  const handleMouseDown = (e, id) => {
-    if (!canDrag) return;
-    e.preventDefault();
-    startDrag(e.clientX, e.clientY, id);
-  };
-  const handleTouchStart = (e, id) => {
-    if (!canDrag) return;
-    const t = e.touches[0];
-    startDrag(t.clientX, t.clientY, id);
-  };
+  const move = (clientX, clientY) => {
+    if (!dragged) return;
+    const cBox = container.current.getBoundingClientRect();
+    const { w, h } = sizes[dragged.id] || { w: 100, h: 100 };
+    const maxOX = w * allowOverflow;
+    const maxOY = h * allowOverflow;
 
-  const moveItem = (clientX, clientY) => {
-    if (!canDrag || !draggedItem) return;
-    const s = imageSizes[draggedItem.id] || { width: 100, height: 100 };
-    const maxOX = s.width * (overflowPercent / 100);
-    const maxOY = s.height * (overflowPercent / 100);
-    let x = clientX - containerRect.left - draggedItem.offsetX;
-    let y = clientY - containerRect.top - draggedItem.offsetY;
-    x = Math.max(-maxOX, Math.min(containerRect.width - s.width + maxOX, x));
-    y = Math.max(-maxOY, Math.min(containerRect.height - s.height + maxOY, y));
+    const x = within(
+      clientX - cBox.left - dragged.offsetX,
+      -maxOX,
+      cBox.width - w + maxOX
+    );
+    const y = within(
+      clientY - cBox.top - dragged.offsetY,
+      -maxOY,
+      cBox.height - h + maxOY
+    );
+
     setImages((prev) =>
-      prev.map((img) => (img.id === draggedItem.id ? { ...img, x, y } : img))
+      prev.map((img) => (img.id === dragged.id ? { ...img, x, y } : img))
     );
   };
 
-  const onMouseMove = (e) => moveItem(e.clientX, e.clientY);
-  const onTouchMove = (e) => {
-    if (!canDrag) return;
-    moveItem(e.touches[0].clientX, e.touches[0].clientY);
+  const stop = () => setDragged(null);
+
+  /* ---------- props depending on canDrag ---------- */
+  const divProps = {
+    ref: container,
+    className: "drag-container",
+    style: {
+      cursor: canDrag ? "grab" : "auto",
+      touchAction: canDrag ? "none" : "auto", // lets page scroll when locked
+    },
   };
 
-  const endDrag = () => {
-    if (!canDrag) return;
-    if (draggedItem) {
-      const prox = calculateEdgeProximity(
-        images,
-        containerRect.width,
-        containerRect.height,
-        imageSizes
-      );
-      setEdgeProximity(prox);
-    }
-    setDraggedItem(null);
-  };
+  if (canDrag) {
+    divProps.onMouseMove = (e) => move(e.clientX, e.clientY);
+    divProps.onMouseUp = stop;
+    divProps.onMouseLeave = stop;
+    divProps.onTouchMove = (e) =>
+      move(e.touches[0].clientX, e.touches[0].clientY);
+    divProps.onTouchEnd = stop;
+    divProps.onTouchCancel = stop;
+  }
 
-  const saveImageRef = (id, el) => {
-    if (el) imageRefs.current[id] = el;
-  };
-
+  /* ---------- render ---------- */
   return (
-    <div
-      ref={containerRef}
-      className="drag-container"
-      onMouseMove={onMouseMove}
-      onMouseUp={endDrag}
-      onMouseLeave={endDrag}
-      onTouchMove={onTouchMove}
-      onTouchEnd={endDrag}
-      onTouchCancel={endDrag}
-      style={{ cursor: canDrag ? "grab" : "default" }}
-    >
+    <div {...divProps}>
       {images.map((img) => (
         <div
           key={img.id}
-          className={`draggable-image-item ${
-            draggedItem?.id === img.id ? "active" : ""
-          }`}
+          className="draggable-image-item"
           style={{
-            left: `${img.x}px`,
-            top: `${img.y}px`,
+            left: img.x,
+            top: img.y,
             zIndex: img.zIndex,
-            cursor: canDrag ? "grab" : "default",
+            pointerEvents: canDrag ? "auto" : "none",
           }}
-          onMouseDown={canDrag ? (e) => handleMouseDown(e, img.id) : undefined}
+          onMouseDown={
+            canDrag ? (e) => start(e.clientX, e.clientY, img.id) : null
+          }
           onTouchStart={
-            canDrag ? (e) => handleTouchStart(e, img.id) : undefined
+            canDrag
+              ? (e) => start(e.touches[0].clientX, e.touches[0].clientY, img.id)
+              : null
           }
         >
           <img
-            ref={(el) => saveImageRef(img.id, el)}
+            ref={(el) => saveRef(img.id, el)}
             src={img.url}
-            alt="draggable"
+            alt=""
             className="draggable-image"
             style={{
-              transform: `scale(${img.scale || 1})`,
+              transform: `scale(${img.scale ?? 1})`,
               transformOrigin: "top left",
             }}
             draggable="false"

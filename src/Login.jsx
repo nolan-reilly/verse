@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
 
+  useEffect(() => {
+    document.body.classList.add("login-body");
+    return () => document.body.classList.remove("login-body");
+  }, []);
+
   return (
-    <div className="bg-white lg-flex vh-100 relative overflow-hidden">
-      <div className="container py-24 lg-px-64 flex flex-col gap-32">
+    <div className="login-page">
+      <div className="container login-card py-24 lg-px-64 flex flex-col gap-16">
         {/* Logo */}
         <div className="flex flex-row justify-end">
           <img className="width-48" src="./star.svg" alt="Star" />
         </div>
 
         {/* Form Content */}
-        <div className="flex flex-col align-center gap-44 flex-1">
+        <div className="flex flex-col align-center gap-32 flex-1">
           <p className="color-black text-large weight-700">Verse</p>
 
           <div className="flex flex-row justify-around bg-black full-width p-8 py-8 rounded">
